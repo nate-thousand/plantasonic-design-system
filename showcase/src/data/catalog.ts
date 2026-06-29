@@ -1,8 +1,12 @@
 declare const __DS_VERSION__: string;
 declare const __BUILD_TIME__: string;
+declare const __GIT_COMMIT__: string;
+declare const __BOOTSTRAP_VERSION__: string;
 
 export const DS_VERSION = __DS_VERSION__;
 export const BUILD_TIME = __BUILD_TIME__;
+export const GIT_COMMIT = __GIT_COMMIT__;
+export const BOOTSTRAP_VERSION = __BOOTSTRAP_VERSION__;
 
 export type NavItem = {
   id: string;
@@ -15,31 +19,91 @@ export const NAV_GROUPS = [
   'Overview',
   'Foundations',
   'Bootstrap',
-  'Components',
-  'Layouts',
+  'Navigation',
+  'Application Shell',
   'Reference',
 ] as const;
 
+export const SHELL_CATEGORIES = [
+  { id: 'shell-overview', label: 'Overview', complete: true },
+  { id: 'shell-app-frame', label: 'App Frame', complete: true },
+  { id: 'shell-workspace', label: 'Workspace Manager', complete: true },
+  { id: 'shell-docks', label: 'Dock Framework', complete: true },
+  { id: 'shell-panels', label: 'Panel System', complete: true },
+  { id: 'shell-overlays', label: 'Overlay Manager', complete: true },
+  { id: 'shell-notifications', label: 'Notifications', complete: true },
+  { id: 'shell-theme', label: 'Theme Provider', complete: true },
+  { id: 'shell-keyboard', label: 'Keyboard', complete: true },
+  { id: 'shell-responsive', label: 'Layout Engine', complete: true },
+  { id: 'shell-window-state', label: 'Window State', complete: true },
+] as const;
+
+export const NAVIGATION_CATEGORIES = [
+  { id: 'nav-overview', label: 'Overview', complete: true },
+  { id: 'nav-app-shell', label: 'App Shell', complete: true },
+  { id: 'nav-sidebar', label: 'Sidebar', complete: true },
+  { id: 'nav-rail', label: 'Navigation Rail', complete: true },
+  { id: 'nav-topbar', label: 'Top Bar', complete: true },
+  { id: 'nav-dock', label: 'Bottom Dock', complete: true },
+  { id: 'nav-inspector', label: 'Inspector', complete: true },
+  { id: 'nav-workspace', label: 'Workspace', complete: true },
+  { id: 'nav-panels', label: 'Panels', complete: true },
+  { id: 'nav-command-palette', label: 'Command Palette', complete: true },
+  { id: 'nav-search', label: 'Search', complete: true },
+  { id: 'nav-breadcrumbs', label: 'Breadcrumbs', complete: true },
+  { id: 'nav-responsive', label: 'Responsive', complete: true },
+  { id: 'nav-keyboard', label: 'Keyboard', complete: true },
+  { id: 'nav-motion', label: 'Motion', complete: true },
+] as const;
+
+export const BOOTSTRAP_CATEGORIES = [
+  { id: 'bs-buttons', label: 'Buttons', complete: true },
+  { id: 'bs-forms', label: 'Forms', complete: true },
+  { id: 'bs-selection', label: 'Selection Controls', complete: true },
+  { id: 'bs-navigation', label: 'Navigation', complete: true },
+  { id: 'bs-cards', label: 'Cards', complete: true },
+  { id: 'bs-lists', label: 'Lists', complete: true },
+  { id: 'bs-tables', label: 'Tables', complete: true },
+  { id: 'bs-feedback', label: 'Feedback', complete: true },
+  { id: 'bs-disclosure', label: 'Disclosure', complete: true },
+  { id: 'bs-floating', label: 'Floating UI', complete: true },
+  { id: 'bs-dialogs', label: 'Dialogs', complete: true },
+  { id: 'bs-utilities', label: 'Utilities', complete: true },
+] as const;
+
 export const NAV: NavItem[] = [
-  { id: 'overview', label: 'Overview', group: 'Overview', keywords: ['home', 'version', 'stats'] },
-  { id: 'tokens', label: 'Tokens', group: 'Foundations', keywords: ['catalog', 'variables'] },
-  { id: 'colors', label: 'Colors', group: 'Foundations', keywords: ['palette', 'swatch', 'hex'] },
+  { id: 'overview', label: 'Overview', group: 'Overview', keywords: ['home', 'version', 'stats', 'search'] },
+  { id: 'tokens', label: 'Design Tokens', group: 'Foundations', keywords: ['catalog', 'variables', 'css'] },
+  { id: 'colors', label: 'Colors', group: 'Foundations', keywords: ['palette', 'swatch', 'hex', 'green'] },
   { id: 'typography', label: 'Typography', group: 'Foundations', keywords: ['font', 'heading', 'mono'] },
   { id: 'spacing', label: 'Spacing', group: 'Foundations', keywords: ['space', 'grid', 'ruler'] },
   { id: 'radius', label: 'Radius', group: 'Foundations', keywords: ['border-radius', 'corners'] },
   { id: 'shadows', label: 'Shadows', group: 'Foundations', keywords: ['elevation', 'glow'] },
   { id: 'motion', label: 'Motion', group: 'Foundations', keywords: ['transition', 'easing', 'duration'] },
-  { id: 'bootstrap', label: 'Bootstrap', group: 'Bootstrap', keywords: ['buttons', 'forms', 'cards'] },
-  { id: 'forms', label: 'Forms', group: 'Components', keywords: ['input', 'select', 'checkbox'] },
-  { id: 'navigation', label: 'Navigation', group: 'Components', keywords: ['navbar', 'tabs', 'breadcrumb'] },
-  { id: 'dialogs', label: 'Dialogs', group: 'Components', keywords: ['modal', 'offcanvas', 'toast'] },
-  { id: 'overlays', label: 'Overlays', group: 'Components', keywords: ['tooltip', 'popover', 'backdrop'] },
-  { id: 'icons', label: 'Icons', group: 'Components', keywords: ['svg', 'glyph'] },
-  { id: 'plantasonic', label: 'Plantasonic', group: 'Components', keywords: ['dock', 'stage', 'preset'] },
-  { id: 'layouts', label: 'Layouts', group: 'Layouts', keywords: ['shell', 'grid', 'viewport'] },
-  { id: 'utilities', label: 'Utilities', group: 'Layouts', keywords: ['helper', 'spacing'] },
-  { id: 'accessibility', label: 'Accessibility', group: 'Reference', keywords: ['contrast', 'focus', 'a11y'] },
+  { id: 'bootstrap', label: 'Bootstrap Overview', group: 'Bootstrap', keywords: ['milestone', 'coverage', '5.0.2'] },
+  ...BOOTSTRAP_CATEGORIES.map((c) => ({
+    id: c.id,
+    label: c.label,
+    group: 'Bootstrap' as const,
+    keywords: [c.label.toLowerCase(), 'bootstrap'],
+  })),
+  { id: 'nav-overview', label: 'Navigation Overview', group: 'Navigation', keywords: ['shell', 'framework', 'workspace', 'milestone 3.5'] },
+  ...NAVIGATION_CATEGORIES.filter((c) => c.id !== 'nav-overview').map((c) => ({
+    id: c.id,
+    label: c.label,
+    group: 'Navigation' as const,
+    keywords: [c.label.toLowerCase(), 'navigation', 'shell', 'command palette'],
+  })),
+  { id: 'shell-overview', label: 'Shell Overview', group: 'Application Shell', keywords: ['application shell', 'framework', 'milestone 4', 'operating system'] },
+  ...SHELL_CATEGORIES.filter((c) => c.id !== 'shell-overview').map((c) => ({
+    id: c.id,
+    label: c.label,
+    group: 'Application Shell' as const,
+    keywords: [c.label.toLowerCase(), 'shell', 'workspace', 'overlay', 'notification'],
+  })),
+  { id: 'accessibility', label: 'Accessibility', group: 'Reference', keywords: ['contrast', 'focus', 'a11y', 'aria'] },
   { id: 'themes', label: 'Themes', group: 'Reference', keywords: ['dark', 'light', 'switcher'] },
+  { id: 'developer', label: 'Developer', group: 'Reference', keywords: ['debug', 'inspector', 'build'] },
   { id: 'changelog', label: 'Changelog', group: 'Reference', keywords: ['release', 'history'] },
 ];
 
@@ -145,44 +209,44 @@ export const CSS_VAR_MAP: Record<string, string> = {
 };
 
 export const COLOR_GROUPS: Record<string, string[]> = {
-  Foundation: [
+  Green: [
     'color.green.500',
     'color.green.700',
     'color.green.900',
+    'color.primary.default',
+    'color.primary.hover',
+    'color.primary.pressed',
+  ],
+  Neutral: [
     'color.neutral.100',
     'color.neutral.400',
+    'color.neutral.500',
     'color.neutral.800',
     'color.neutral.900',
     'color.neutral.white',
     'color.neutral.black',
   ],
-  Brand: [
-    'color.primary.default',
-    'color.primary.hover',
-    'color.primary.pressed',
-    'color.primary.disabled',
+  Accent: [
     'color.secondary',
     'color.accent',
+    'color.text.accent',
+    'color.text.link',
+    'color.border.interactive',
+    'color.border.focus',
   ],
   Surfaces: [
-    'color.surface.default',
     'color.surface.app',
     'color.surface.stage',
     'color.surface.nav',
     'color.surface.dock',
-    'color.surface.input',
-    'color.surface.card',
     'color.surface.raised',
-    'color.surface.raised-hover',
+    'color.surface.input',
     'color.surface.sunken',
-    'color.surface.overlay',
   ],
   Text: [
     'color.text.primary',
     'color.text.secondary',
     'color.text.muted',
-    'color.text.accent',
-    'color.text.link',
     'color.text.inverse',
   ],
   Status: [
@@ -192,7 +256,7 @@ export const COLOR_GROUPS: Record<string, string[]> = {
     'color.status.info',
     'color.decorative.favorite',
   ],
-  Overlays: [
+  Overlay: [
     'color.overlay.backdrop',
     'color.overlay.scrim-light',
     'color.overlay.glass',
@@ -200,20 +264,27 @@ export const COLOR_GROUPS: Record<string, string[]> = {
   ],
 };
 
-export const BOOTSTRAP_DEMOS = [
-  'Buttons', 'Button groups', 'Forms', 'Checkboxes', 'Radios', 'Switches', 'Selects',
-  'Inputs', 'Textareas', 'Cards', 'Alerts', 'Badges', 'Progress', 'Accordion', 'Tabs',
-  'Navbar', 'Dropdowns', 'Pagination', 'Breadcrumbs', 'Tables', 'Modals', 'Offcanvas',
-  'Tooltips', 'Popovers', 'Toasts', 'Spinners', 'Collapse', 'List groups', 'Placeholders',
+export const BOOTSTRAP_DEMOS = BOOTSTRAP_CATEGORIES.map((c) => c.label);
+
+export const NAV_FRAMEWORK_PRIMITIVES = [
+  'App Shell', 'Sidebar', 'Navigation Rail', 'Top Bar', 'Bottom Dock',
+  'Inspector', 'Workspace', 'Panels', 'Command Palette', 'Search', 'Breadcrumbs',
+] as const;
+
+export const PLANTASONIC_M3_COMPONENTS = [
+  'Knob', 'Slider', 'Transport Bar', 'Dock', 'Preset Card', 'Preset Browser',
+  'Parameter Group', 'MIDI Status', 'Piano Keyboard', 'Visualizer Frame',
+  'Notification', 'Overlay', 'Empty State', 'Error State', 'Loading State',
 ];
 
-export const PLANTASONIC_COMPONENTS = [
-  'Dock', 'Transport', 'Preset Browser', 'Knobs', 'Sliders', 'Performance Controls',
-  'MIDI Monitor', 'Keyboard', 'Status Bar', 'Panels', 'Cards', 'Control Groups',
-  'Visualizer Frame', 'Overlay', 'Loading Screen', 'Error State', 'Notification',
-];
+export const SHELL_MODULES = [
+  'App Frame', 'Workspace Manager', 'Dock Framework', 'Panel System',
+  'Overlay Manager', 'Notification System', 'Theme Provider', 'Command Registry',
+  'Keyboard Framework', 'Window State',
+] as const;
 
 export const COMPONENT_COUNT =
-  BOOTSTRAP_DEMOS.length + PLANTASONIC_COMPONENTS.length + NAV.filter((n) =>
-    ['forms', 'navigation', 'dialogs', 'overlays', 'icons'].includes(n.id),
-  ).length;
+  BOOTSTRAP_CATEGORIES.length +
+  PLANTASONIC_M3_COMPONENTS.length +
+  NAV_FRAMEWORK_PRIMITIVES.length +
+  SHELL_MODULES.length;

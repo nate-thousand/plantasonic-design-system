@@ -1,4 +1,4 @@
-import { BOOTSTRAP_DEMOS, CSS_VAR_MAP, NAV, PLANTASONIC_COMPONENTS } from '../data/catalog';
+import { BOOTSTRAP_CATEGORIES, CSS_VAR_MAP, NAV, NAV_FRAMEWORK_PRIMITIVES, PLANTASONIC_M3_COMPONENTS, SHELL_MODULES } from '../data/catalog';
 
 export type SearchResult = {
   id: string;
@@ -27,12 +27,20 @@ function buildIndex(): SearchResult[] {
     items.push({ id: cssVar, label: cssVar, type: 'token', href: '#colors' });
   }
 
-  for (const name of BOOTSTRAP_DEMOS) {
-    items.push({ id: `bs-${name}`, label: name, type: 'bootstrap', href: '#bootstrap' });
+  for (const name of BOOTSTRAP_CATEGORIES) {
+    items.push({ id: name.id, label: name.label, type: 'bootstrap', href: `#${name.id}` });
   }
 
-  for (const name of PLANTASONIC_COMPONENTS) {
-    items.push({ id: `ps-${name}`, label: name, type: 'component', href: '#plantasonic' });
+  for (const name of PLANTASONIC_M3_COMPONENTS) {
+    items.push({ id: `ps-${name}`, label: name, type: 'component', href: '#overview' });
+  }
+
+  for (const name of NAV_FRAMEWORK_PRIMITIVES) {
+    items.push({ id: `nav-${name}`, label: name, type: 'component', href: '#nav-overview' });
+  }
+
+  for (const name of SHELL_MODULES) {
+    items.push({ id: `shell-${name}`, label: name, type: 'component', href: '#shell-overview' });
   }
 
   const classes = ['btn-primary', 'form-control', 'navbar', 'modal', 'card', 'alert', 'badge', 'nav-tabs'];

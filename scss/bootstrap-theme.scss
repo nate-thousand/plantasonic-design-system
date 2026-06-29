@@ -1,94 +1,19 @@
 /**
- * Plantasonic Bootstrap 5.0.2 theme overrides
+ * Plantasonic Bootstrap 5.0.2 — compile-time variable overrides
  *
- * Import order in consuming apps:
+ * Import order:
  *   1. @import 'plantasonic-design-system/scss/bootstrap-theme';
  *   2. @import 'bootstrap/scss/bootstrap';
+ *   3. @import 'plantasonic-design-system/scss/bootstrap-components';
+ *   4. @import 'plantasonic-design-system/scss/bootstrap-utilities';
  *
- * For runtime theming, also link css/variables.css and use --ds-* custom properties
- * in app-specific styles.
- *
- * Source tokens: tokens/foundation.tokens.json + tokens/theme.dark.tokens.json
+ * Token source: tokens/*.tokens.json → _bootstrap-compile.generated.scss
  */
 
 @use 'sass:color';
+@import 'bootstrap-compile.generated';
 
-// ── Semantic token values (dark theme default) ─────────────────────────────
-
-$ds-color-primary: #00ff57;
-$ds-color-primary-hover: #4dff89;
-$ds-color-primary-pressed: #00cc46;
-$ds-color-primary-disabled: #333333;
-$ds-color-secondary: #4dff89;
-$ds-color-accent: #4dff89;
-
-$ds-color-surface-default: #070f0a;
-$ds-color-surface-app: #070f0a;
-$ds-color-surface-stage: #000000;
-$ds-color-surface-nav: #101c15;
-$ds-color-surface-dock: #101c15;
-$ds-color-surface-input: #333333;
-$ds-color-surface-card: #101c15;
-$ds-color-surface-raised: #1a1a1a;
-$ds-color-surface-raised-hover: #182b20;
-$ds-color-surface-sunken: #050a07;
-$ds-color-surface-overlay: #333333;
-
-$ds-color-text-primary: #4dff89;
-$ds-color-text-secondary: #e5e5e5;
-$ds-color-text-muted: #999999;
-$ds-color-text-accent: #4dff89;
-$ds-color-text-link: #4dff89;
-$ds-color-text-on-primary: #070f0a;
-$ds-color-text-on-secondary: #070f0a;
-
-$ds-color-border-default: rgba(255, 255, 255, 0.14);
-$ds-color-border-subtle: rgba(255, 255, 255, 0.08);
-$ds-color-border-strong: #ffffff;
-$ds-color-border-focus: #4dff89;
-
-$ds-color-overlay-backdrop: rgba(0, 0, 0, 0.65);
-$ds-color-overlay-scrim-light: rgba(255, 255, 255, 0.08);
-$ds-color-overlay-scrim-strong: rgba(255, 255, 255, 0.12);
-
-$ds-color-success: #00ff57;
-$ds-color-warning: #f5c542;
-$ds-color-error: #ff5c5c;
-$ds-color-info: #4dff89;
-
-$ds-font-family-sans: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-$ds-font-family-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', monospace;
-$ds-font-size-base: 1rem;
-$ds-font-size-body-sm: 0.875rem;
-$ds-font-size-h4: 1.125rem;
-$ds-font-size-h1: 2rem;
-$ds-font-size-h2: 1.5rem;
-$ds-font-size-h3: 1.25rem;
-$ds-font-size-label: 0.875rem;
-$ds-font-size-caption: 0.75rem;
-$ds-line-height-relaxed: 1.6;
-$ds-headings-font-weight: 600;
-$ds-font-weight-label: 600;
-
-$ds-spacer: 1rem;
-$ds-space-12: 0.75rem;
-$ds-space-3: 1rem;
-
-$ds-radius-default: 0.5rem;
-$ds-radius-sm: 0.25rem;
-$ds-radius-lg: 1rem;
-
-$ds-shadow-sm: 0 4px 12px rgba(0, 255, 87, 0.08);
-$ds-shadow-md: 0 8px 24px rgba(0, 255, 87, 0.1);
-$ds-shadow-lg: 0 16px 48px rgba(0, 255, 87, 0.12);
-$ds-shadow-focus: 0 0 0 0.2rem rgba(77, 255, 137, 0.35);
-$ds-shadow-stage-inset: inset 0 0 48px rgba(0, 0, 0, 0.65);
-
-$ps-slider-track: $ds-color-surface-input;
-$ps-slider-thumb: $ds-color-primary;
-$ps-shadow-sidebar: 4px 0 24px rgba(0, 0, 0, 0.4);
-
-// ── Bootstrap variable overrides ─────────────────────────────────────────────
+// ── Bootstrap palette ───────────────────────────────────────────────────────
 
 $primary: $ds-color-primary;
 $secondary: $ds-color-secondary;
@@ -138,10 +63,15 @@ $focus-ring-color: $ds-color-border-focus;
 $focus-ring-width: 0.2rem;
 $focus-ring-opacity: 1;
 
+// ── Buttons ─────────────────────────────────────────────────────────────────
+
 $btn-font-weight: $ds-font-weight-label;
 $btn-border-radius: $ds-radius-default;
 $btn-border-radius-sm: $ds-radius-sm;
 $btn-border-radius-lg: $ds-radius-lg;
+$btn-box-shadow: none;
+$btn-focus-box-shadow: $ds-shadow-focus;
+$btn-active-box-shadow: none;
 $btn-primary-color: $ds-color-text-on-primary;
 $btn-primary-bg: $ds-color-primary;
 $btn-primary-border-color: $ds-color-primary;
@@ -155,16 +85,40 @@ $btn-secondary-color: $ds-color-text-on-secondary;
 $btn-secondary-bg: $ds-color-surface-card;
 $btn-secondary-border-color: $ds-color-border-default;
 $btn-secondary-hover-bg: $ds-color-surface-raised-hover;
+$btn-secondary-hover-border-color: $ds-color-border-default;
+$btn-secondary-active-bg: $ds-color-surface-overlay;
+$btn-secondary-active-border-color: $ds-color-border-default;
+$btn-success-color: $ds-color-text-on-primary;
+$btn-success-bg: $ds-color-success;
+$btn-success-border-color: $ds-color-success;
+$btn-success-hover-bg: color.adjust($ds-color-success, $lightness: 8%);
+$btn-success-hover-border-color: color.adjust($ds-color-success, $lightness: 8%);
+$btn-info-color: $ds-color-text-on-primary;
+$btn-info-bg: $ds-color-info;
+$btn-info-border-color: $ds-color-info;
+$btn-warning-color: $ds-color-text-on-primary;
+$btn-warning-bg: $ds-color-warning;
+$btn-warning-border-color: $ds-color-warning;
+$btn-danger-color: $ds-color-text-primary;
+$btn-danger-bg: $ds-color-error;
+$btn-danger-border-color: $ds-color-error;
+$btn-danger-hover-bg: color.adjust($ds-color-error, $lightness: -5%);
+$btn-danger-hover-border-color: color.adjust($ds-color-error, $lightness: -5%);
 $btn-outline-secondary-color: $ds-color-text-secondary;
 $btn-outline-secondary-border-color: $ds-color-border-strong;
 $btn-outline-secondary-hover-bg: $ds-color-surface-overlay;
 $btn-outline-secondary-hover-color: $ds-color-text-primary;
+$btn-outline-secondary-active-bg: $ds-color-surface-raised;
+$btn-outline-secondary-active-color: $ds-color-text-primary;
 $btn-link-color: $ds-color-text-secondary;
 $btn-link-hover-color: $ds-color-text-accent;
 $btn-disabled-opacity: 0.45;
 
+// ── Forms ───────────────────────────────────────────────────────────────────
+
 $input-bg: $ds-color-surface-input;
 $input-disabled-bg: $ds-color-surface-sunken;
+$input-disabled-border-color: $ds-color-border-subtle;
 $input-color: $ds-color-text-primary;
 $input-border-color: $ds-color-border-default;
 $input-border-radius: $ds-radius-default;
@@ -172,6 +126,10 @@ $input-focus-bg: $ds-color-surface-input;
 $input-focus-border-color: $ds-color-border-focus;
 $input-focus-box-shadow: $ds-shadow-focus;
 $input-placeholder-color: $ds-color-text-muted;
+$input-group-addon-color: $ds-color-text-secondary;
+$input-group-addon-bg: $ds-color-surface-sunken;
+$input-group-addon-border-color: $ds-color-border-default;
+
 $form-label-color: $ds-color-text-secondary;
 $form-label-font-size: $ds-font-size-label;
 $form-label-font-weight: $ds-font-weight-label;
@@ -182,7 +140,15 @@ $form-check-input-checked-bg-color: $ds-color-primary;
 $form-check-input-checked-border-color: $ds-color-primary;
 $form-check-input-focus-border: $ds-color-border-focus;
 $form-check-input-focus-box-shadow: $ds-shadow-focus;
+$form-check-input-disabled-opacity: 0.45;
+$form-check-label-color: $ds-color-text-primary;
+$form-check-label-disabled-opacity: 0.45;
+$form-switch-color: $ds-color-surface-input;
+$form-switch-width: 2.5em;
+$form-switch-checked-color: $ds-color-primary;
 $form-select-bg: $ds-color-surface-input;
+$form-select-disabled-bg: $ds-color-surface-sunken;
+$form-select-disabled-border-color: $ds-color-border-subtle;
 $form-select-border-color: $ds-color-border-default;
 $form-select-color: $ds-color-text-primary;
 $form-select-focus-border-color: $ds-color-border-focus;
@@ -192,6 +158,12 @@ $form-range-track-height: $ds-space-12;
 $form-range-thumb-bg: $ps-slider-thumb;
 $form-range-thumb-active-bg: $ds-color-primary-pressed;
 $form-range-thumb-focus-box-shadow: $ds-shadow-focus;
+$form-feedback-valid-color: $ds-color-success;
+$form-feedback-invalid-color: $ds-color-error;
+$form-valid-border-color: $ds-color-success;
+$form-invalid-border-color: $ds-color-error;
+
+// ── Cards ───────────────────────────────────────────────────────────────────
 
 $card-bg: $ds-color-surface-card;
 $card-border-color: $ds-color-border-default;
@@ -200,21 +172,47 @@ $card-cap-bg: transparent;
 $card-cap-color: $ds-color-text-muted;
 $card-color: $ds-color-text-primary;
 
+// ── Navigation ──────────────────────────────────────────────────────────────
+
 $navbar-dark-color: $ds-color-text-secondary;
 $navbar-dark-hover-color: $ds-color-text-primary;
 $navbar-dark-active-color: $ds-color-text-accent;
+$navbar-dark-disabled-color: $ds-color-text-muted;
 $navbar-dark-brand-color: $ds-color-text-primary;
+$navbar-dark-brand-hover-color: $ds-color-text-accent;
+$navbar-dark-toggler-border-color: $ds-color-border-subtle;
 $navbar-dark-bg: $ds-color-surface-nav;
 $navbar-padding-y: $ds-space-12;
-$navbar-padding-x: $ds-space-3;
+$navbar-padding-x: $ds-spacer;
 
 $nav-link-color: $ds-color-text-secondary;
 $nav-link-hover-color: $ds-color-text-primary;
 $nav-link-disabled-color: $ds-color-text-muted;
 $nav-tabs-border-color: $ds-color-border-subtle;
+$nav-tabs-link-hover-border-color: $ds-color-border-subtle;
 $nav-tabs-link-active-color: $ds-color-text-primary;
 $nav-tabs-link-active-bg: $ds-color-surface-overlay;
 $nav-tabs-link-active-border-color: $ds-color-border-subtle;
+$nav-pills-link-active-color: $ds-color-text-on-primary;
+$nav-pills-link-active-bg: $ds-color-primary;
+
+$breadcrumb-divider-color: $ds-color-text-muted;
+$breadcrumb-active-color: $ds-color-text-primary;
+
+$pagination-color: $ds-color-text-secondary;
+$pagination-bg: $ds-color-surface-raised;
+$pagination-border-color: $ds-color-border-default;
+$pagination-hover-color: $ds-color-text-primary;
+$pagination-hover-bg: $ds-color-surface-overlay;
+$pagination-hover-border-color: $ds-color-border-default;
+$pagination-active-color: $ds-color-text-on-primary;
+$pagination-active-bg: $ds-color-primary;
+$pagination-active-border-color: $ds-color-primary;
+$pagination-disabled-color: $ds-color-text-muted;
+$pagination-disabled-bg: $ds-color-surface-sunken;
+$pagination-disabled-border-color: $ds-color-border-subtle;
+
+// ── Overlays ────────────────────────────────────────────────────────────────
 
 $dropdown-bg: $ds-color-surface-raised;
 $dropdown-border-color: $ds-color-border-subtle;
@@ -224,6 +222,8 @@ $dropdown-link-hover-color: $ds-color-text-primary;
 $dropdown-link-hover-bg: $ds-color-surface-overlay;
 $dropdown-link-active-color: $ds-color-text-primary;
 $dropdown-link-active-bg: $ds-color-surface-overlay;
+$dropdown-link-disabled-color: $ds-color-text-muted;
+$dropdown-header-color: $ds-color-text-muted;
 $dropdown-box-shadow: $ds-shadow-lg;
 
 $modal-content-bg: $ds-color-surface-raised;
@@ -246,6 +246,15 @@ $tooltip-color: $ds-color-text-primary;
 $tooltip-border-radius: $ds-radius-sm;
 $tooltip-opacity: 1;
 
+$popover-bg: $ds-color-surface-raised;
+$popover-border-color: $ds-color-border-subtle;
+$popover-header-bg: $ds-color-surface-overlay;
+$popover-header-color: $ds-color-text-primary;
+$popover-body-color: $ds-color-text-primary;
+$popover-box-shadow: $ds-shadow-lg;
+
+// ── Feedback ────────────────────────────────────────────────────────────────
+
 $progress-bg: $ds-color-surface-sunken;
 $progress-bar-bg: $ds-color-primary;
 $progress-border-radius: $border-radius-pill;
@@ -256,6 +265,14 @@ $alert-bg-scale: -80%;
 $alert-border-scale: -70%;
 $alert-color-scale: 40%;
 
+$toast-background-color: $ds-color-surface-raised;
+$toast-border-color: $ds-color-border-subtle;
+$toast-border-radius: $ds-radius-default;
+$toast-box-shadow: $ds-shadow-lg;
+$toast-header-color: $ds-color-text-secondary;
+$toast-header-background-color: $ds-color-surface-overlay;
+$toast-header-border-color: $ds-color-border-subtle;
+
 $btn-close-color: $ds-color-text-secondary;
 $btn-close-opacity: 0.75;
 $btn-close-hover-opacity: 1;
@@ -263,16 +280,22 @@ $btn-close-hover-opacity: 1;
 $badge-font-size: $ds-font-size-caption;
 $badge-font-weight: $ds-font-weight-label;
 $badge-border-radius: $ds-radius-sm;
+$badge-color: $ds-color-text-on-primary;
 
 $spinner-width: 1.25rem;
 $spinner-height: 1.25rem;
 $spinner-border-width: 0.15em;
+
+// ── Tables & lists ──────────────────────────────────────────────────────────
 
 $table-bg: transparent;
 $table-color: $ds-color-text-primary;
 $table-border-color: $ds-color-border-subtle;
 $table-striped-bg: $ds-color-overlay-scrim-light;
 $table-hover-bg: $ds-color-overlay-scrim-strong;
+$table-active-bg: $ds-color-overlay-scrim-strong;
+$table-group-separator-color: $ds-color-border-subtle;
+$table-caption-color: $ds-color-text-muted;
 
 $list-group-bg: $ds-color-surface-raised;
 $list-group-border-color: $ds-color-border-subtle;
@@ -280,6 +303,19 @@ $list-group-color: $ds-color-text-secondary;
 $list-group-hover-bg: $ds-color-surface-overlay;
 $list-group-active-bg: $ds-color-surface-overlay;
 $list-group-active-color: $ds-color-text-primary;
+$list-group-disabled-color: $ds-color-text-muted;
+$list-group-action-color: $ds-color-text-secondary;
+$list-group-action-hover-color: $ds-color-text-primary;
+
+$accordion-color: $ds-color-text-primary;
+$accordion-bg: $ds-color-surface-card;
+$accordion-border-color: $ds-color-border-subtle;
+$accordion-button-color: $ds-color-text-primary;
+$accordion-button-bg: $ds-color-surface-raised;
+$accordion-button-active-bg: $ds-color-surface-overlay;
+$accordion-button-active-color: $ds-color-text-primary;
+$accordion-button-focus-border-color: $ds-color-border-focus;
+$accordion-button-focus-box-shadow: $ds-shadow-focus;
 
 $enable-shadows: true;
 $enable-rounded: true;

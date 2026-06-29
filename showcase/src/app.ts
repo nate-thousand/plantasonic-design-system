@@ -1,4 +1,5 @@
-import { BUILD_TIME, CSS_VAR_MAP, DS_VERSION, NAV, NAV_GROUPS } from './data/catalog';
+import { bindApplicationShell, EXAMPLE_SHELL } from '@ds/shell';
+import { BUILD_TIME, CSS_VAR_MAP, DS_VERSION, GIT_COMMIT, BOOTSTRAP_VERSION, NAV, NAV_GROUPS } from './data/catalog';
 import { inspectElement, renderInspector } from './lib/inspector';
 import { search } from './lib/search';
 import { countTokens } from './lib/tokens';
@@ -12,7 +13,7 @@ export function mountApp(root: HTMLElement): void {
   root.innerHTML = `
     <aside class="ds-showcase__nav" aria-label="Showcase navigation">
       <div class="ds-showcase__brand p-3 border-bottom">
-        <div class="fw-semibold">Plantasonic DS</div>
+        <div class="fw-semibold"><span style="color:var(--ds-color-text-accent)">Plantasonic</span> DS</div>
         <div class="ds-type-caption text-muted">Showcase v${DS_VERSION}</div>
       </div>
       <div class="p-2 border-bottom">
@@ -62,8 +63,11 @@ export function mountApp(root: HTMLElement): void {
       <div class="p-3 border-bottom"><strong class="small">Developer Panel</strong></div>
       <dl class="small p-3 mb-0 ds-dev-stats">
         <dt>Version</dt><dd>${DS_VERSION}</dd>
+        <dt>Commit</dt><dd class="font-monospace">${GIT_COMMIT}</dd>
         <dt>Build</dt><dd class="font-monospace">${new Date(BUILD_TIME).toLocaleString()}</dd>
+        <dt>Bootstrap</dt><dd class="font-monospace">${BOOTSTRAP_VERSION}</dd>
         <dt>Theme</dt><dd id="dev-theme">${getTheme()}</dd>
+        <dt>Breakpoint</dt><dd id="dev-breakpoint">—</dd>
         <dt>Token count</dt><dd>${Object.keys(CSS_VAR_MAP).length}</dd>
         <dt>CSS variables</dt><dd id="dev-css-count">${countTokens()}</dd>
         <dt>Generated</dt><dd><code>css/variables.css</code></dd>
@@ -86,7 +90,29 @@ export function mountApp(root: HTMLElement): void {
   const themePreview = () => {
     const label = document.querySelector('#theme-preview-label');
     if (label) label.textContent = getTheme();
+    syncDevPageStats(viewport);
   };
+
+  function syncDevPageStats(vp: HTMLElement): void {
+    const w = vp.getBoundingClientRect().width;
+    const bp = w < 576 ? 'xs' : w < 768 ? 'sm' : w < 992 ? 'md' : w < 1200 ? 'lg' : 'xl';
+    const devBp = document.querySelector('#dev-breakpoint');
+    if (devBp) devBp.textContent = bp;
+    const pageTheme = document.querySelector('#dev-page-theme');
+    const pageVp = document.querySelector('#dev-page-viewport');
+    const pageBp = document.querySelector('#dev-page-breakpoint');
+    const pageMotion = document.querySelector('#dev-page-motion');
+    if (pageTheme) pageTheme.textContent = getTheme();
+    if (pageVp) pageVp.textContent = `${Math.round(w)}px (${vp.dataset.viewport ?? 'desktop'})`;
+    if (pageBp) pageBp.textContent = bp;
+    if (pageMotion) {
+      pageMotion.textContent = document.documentElement.hasAttribute('data-ds-reduced-motion')
+        ? 'forced'
+        : window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          ? 'prefers-reduced'
+          : 'normal';
+    }
+  }
 
   themeSelect.value = getTheme();
 
@@ -101,6 +127,9 @@ export function mountApp(root: HTMLElement): void {
     });
     themePreview();
     initBootstrapWidgets(content);
+    bindMotionDemos(content);
+    bindApplicationShell(EXAMPLE_SHELL);
+    syncDevPageStats(viewport);
   }
 
   window.addEventListener('hashchange', () => navigate(location.hash.replace('#', '') || 'overview'));
@@ -114,10 +143,17 @@ export function mountApp(root: HTMLElement): void {
 
   reducedMotion.addEventListener('change', () => {
     document.documentElement.toggleAttribute('data-ds-reduced-motion', reducedMotion.checked);
+    syncDevPageStats(viewport);
   });
 
   searchInput.addEventListener('input', () => {
+    const q = searchInput.value.trim().toLowerCase();
     const results = search(searchInput.value);
+    navLinks.forEach((link) => {
+      const match = !q || link.textContent!.toLowerCase().includes(q) || link.dataset.route!.includes(q);
+      link.classList.toggle('ds-nav-item--dim', !!q && !match);
+      link.classList.toggle('ds-nav-item--match', !!q && match);
+    });
     searchResults.innerHTML = results.length
       ? results.map((r) => `<a href="${r.href}" class="ds-search-item" data-route="${r.href.replace('#', '')}"><span class="badge bg-secondary me-1">${r.type}</span>${r.label}</a>`).join('')
       : '';
@@ -139,6 +175,9 @@ export function mountApp(root: HTMLElement): void {
   });
 
   bindViewportControls(viewport, root.querySelectorAll('[data-viewport]'), root.querySelector('#viewport-width') as HTMLInputElement);
+  viewport.addEventListener('transitionend', () => syncDevPageStats(viewport));
+  window.addEventListener('resize', () => syncDevPageStats(viewport));
+  syncDevPageStats(viewport);
 
   document.addEventListener('ds-theme-change', () => {
     devTheme.textContent = getTheme();
@@ -150,4 +189,22 @@ async function initBootstrapWidgets(container: HTMLElement): Promise<void> {
   const { Tooltip, Popover } = await import('bootstrap');
   container.querySelectorAll('[data-bs-toggle="tooltip"]').forEach((el) => new Tooltip(el));
   container.querySelectorAll('[data-bs-toggle="popover"]').forEach((el) => new Popover(el));
+}
+
+function bindMotionDemos(container: HTMLElement): void {
+  container.querySelectorAll<HTMLElement>('.ds-motion-fade').forEach((btn) => {
+    btn.onclick = () => btn.classList.toggle('ds-motion-fade--on');
+  });
+  container.querySelectorAll<HTMLElement>('.ds-motion-expand').forEach((btn) => {
+    btn.onclick = () => {
+      const panel = btn.nextElementSibling as HTMLElement | null;
+      if (panel) panel.classList.toggle('ds-motion-expand-panel--open');
+      else {
+        const el = document.createElement('div');
+        el.className = 'ds-motion-expand-panel ds-motion-expand-panel--open small mt-2 p-2 rounded';
+        el.textContent = 'Expanded content panel';
+        btn.after(el);
+      }
+    };
+  });
 }

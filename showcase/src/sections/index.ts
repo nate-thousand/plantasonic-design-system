@@ -1,4 +1,18 @@
-import { renderBootstrap, renderDialogsSection, renderFormsSection, renderIconsSection, renderNavigationSection, renderOverlaysSection } from './bootstrap';
+import {
+  renderBootstrap,
+  renderBsButtons,
+  renderBsCards,
+  renderBsDialogs,
+  renderBsDisclosure,
+  renderBsFeedback,
+  renderBsFloating,
+  renderBsForms,
+  renderBsLists,
+  renderBsNavigation,
+  renderBsSelection,
+  renderBsTables,
+  renderBsUtilities,
+} from './bootstrap/index';
 import {
   renderColors,
   renderMotion,
@@ -8,14 +22,42 @@ import {
   renderTypography,
 } from './foundations';
 import { renderOverview, renderTokens } from './overview';
-import { renderPlantasonic } from './plantasonic';
+import { renderDeveloper } from './developer';
 import {
   renderAccessibility,
   renderChangelog,
-  renderLayouts,
   renderThemes,
-  renderUtilities,
 } from './reference';
+import {
+  renderNavAppShell,
+  renderNavBreadcrumbs,
+  renderNavCommandPalette,
+  renderNavDock,
+  renderNavInspector,
+  renderNavKeyboard,
+  renderNavMotion,
+  renderNavOverview,
+  renderNavPanels,
+  renderNavRail,
+  renderNavResponsive,
+  renderNavSearch,
+  renderNavSidebar,
+  renderNavTopbar,
+  renderNavWorkspace,
+} from './navigation';
+import {
+  renderShellAppFrame,
+  renderShellDocks,
+  renderShellKeyboard,
+  renderShellNotifications,
+  renderShellOverlays,
+  renderShellOverview,
+  renderShellPanels,
+  renderShellResponsive,
+  renderShellTheme,
+  renderShellWindowState,
+  renderShellWorkspace,
+} from './application-shell';
 
 export type SectionRenderer = () => string;
 
@@ -29,16 +71,47 @@ export const SECTIONS: Record<string, SectionRenderer> = {
   shadows: renderShadows,
   motion: renderMotion,
   bootstrap: renderBootstrap,
-  forms: renderFormsSection,
-  navigation: renderNavigationSection,
-  dialogs: renderDialogsSection,
-  overlays: renderOverlaysSection,
-  icons: renderIconsSection,
-  plantasonic: renderPlantasonic,
-  layouts: renderLayouts,
-  utilities: renderUtilities,
+  'bs-buttons': renderBsButtons,
+  'bs-forms': renderBsForms,
+  'bs-selection': renderBsSelection,
+  'bs-navigation': renderBsNavigation,
+  'bs-cards': renderBsCards,
+  'bs-lists': renderBsLists,
+  'bs-tables': renderBsTables,
+  'bs-feedback': renderBsFeedback,
+  'bs-disclosure': renderBsDisclosure,
+  'bs-floating': renderBsFloating,
+  'bs-dialogs': renderBsDialogs,
+  'bs-utilities': renderBsUtilities,
+  'nav-overview': renderNavOverview,
+  'nav-app-shell': renderNavAppShell,
+  'nav-sidebar': renderNavSidebar,
+  'nav-rail': renderNavRail,
+  'nav-topbar': renderNavTopbar,
+  'nav-dock': renderNavDock,
+  'nav-inspector': renderNavInspector,
+  'nav-workspace': renderNavWorkspace,
+  'nav-panels': renderNavPanels,
+  'nav-command-palette': renderNavCommandPalette,
+  'nav-search': renderNavSearch,
+  'nav-breadcrumbs': renderNavBreadcrumbs,
+  'nav-responsive': renderNavResponsive,
+  'nav-keyboard': renderNavKeyboard,
+  'nav-motion': renderNavMotion,
+  'shell-overview': renderShellOverview,
+  'shell-app-frame': renderShellAppFrame,
+  'shell-workspace': renderShellWorkspace,
+  'shell-docks': renderShellDocks,
+  'shell-panels': renderShellPanels,
+  'shell-overlays': renderShellOverlays,
+  'shell-notifications': renderShellNotifications,
+  'shell-theme': renderShellTheme,
+  'shell-keyboard': renderShellKeyboard,
+  'shell-responsive': renderShellResponsive,
+  'shell-window-state': renderShellWindowState,
   accessibility: renderAccessibility,
   themes: renderThemes,
+  developer: renderDeveloper,
   changelog: renderChangelog,
 };
 
@@ -46,3 +119,5 @@ export function renderSection(id: string): string {
   const fn = SECTIONS[id] ?? SECTIONS.overview;
   return fn();
 }
+
+export { renderSection as default };

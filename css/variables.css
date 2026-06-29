@@ -27,9 +27,9 @@
   --ds-color-surface-overlay: #333333;
 
   /* Text */
-  --ds-color-text-primary: #4dff89;
-  --ds-color-text-secondary: #e5e5e5;
-  --ds-color-text-muted: #999999;
+  --ds-color-text-primary: #e5e5e5;
+  --ds-color-text-secondary: #999999;
+  --ds-color-text-muted: #808080;
   --ds-color-text-accent: #4dff89;
   --ds-color-text-link: #4dff89;
   --ds-color-text-inverse: #e5e5e5;
@@ -160,9 +160,9 @@
   --ds-color-surface-overlay: #333333;
 
   /* Text */
-  --ds-color-text-primary: #4dff89;
-  --ds-color-text-secondary: #e5e5e5;
-  --ds-color-text-muted: #999999;
+  --ds-color-text-primary: #e5e5e5;
+  --ds-color-text-secondary: #999999;
+  --ds-color-text-muted: #808080;
   --ds-color-text-accent: #4dff89;
   --ds-color-text-link: #4dff89;
   --ds-color-text-inverse: #e5e5e5;
@@ -289,8 +289,7 @@
 
   /* Text */
   --ds-color-text-primary: #070f0a;
-  --ds-color-text-secondary: #000000;
-  --ds-color-text-muted: #808080;
+  --ds-color-text-secondary: #4d4d4d;
   --ds-color-text-inverse: #ffffff;
 
   /* Borders */

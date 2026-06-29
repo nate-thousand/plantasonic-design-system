@@ -7,9 +7,10 @@ Maps Plantasonic design system component names to Bootstrap 5.0.2 classes. Use t
 ## Rules
 
 1. Import `scss/bootstrap-theme.scss` before Bootstrap SCSS
-2. Never edit files in `node_modules/bootstrap/`
-3. Custom layout classes use the `ps-` prefix in consuming apps
-4. Reference tokens, not raw values, in custom styles
+2. Import `scss/css-theme-bridge.scss` after Bootstrap when switching themes at runtime
+3. Never edit files in `node_modules/bootstrap/`
+4. Custom layout classes use the `ps-` prefix in consuming apps
+5. Reference tokens, not raw values, in custom styles
 
 ---
 
@@ -96,6 +97,7 @@ These are defined in consuming apps, not this package:
 // app bootstrap entry
 @import 'plantasonic-design-system/scss/bootstrap-theme';
 @import 'bootstrap/scss/bootstrap';
+@import 'plantasonic-design-system/scss/css-theme-bridge'; // runtime theme switching
 ```
 
 ```html

@@ -25,7 +25,7 @@
     },
     "text": {
       "primary": { "$type": "color", "$value": "{color.green.900}" },
-      "secondary": { "$type": "color", "$value": "{color.neutral.black}" },
+      "secondary": { "$type": "color", "$value": "{color.neutral.700}" },
       "muted": { "$type": "color", "$value": "{color.neutral.500}" },
       "accent": { "$type": "color", "$value": "{color.green.700}" },
       "link": { "$type": "color", "$value": "{color.accent}" },

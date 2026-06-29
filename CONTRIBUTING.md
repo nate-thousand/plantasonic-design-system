@@ -6,12 +6,22 @@ Thank you for contributing to the Plantasonic Design System.
 
 This repository contains design tokens, CSS variables, Bootstrap theme overrides, and documentation only. Do not add application logic, engine code, or product-specific runtime code here.
 
+All contributions must align with [docs/VISION_AND_SCOPE.md](./docs/VISION_AND_SCOPE.md) and pass its [decision filter](./docs/VISION_AND_SCOPE.md#decision-filter).
+
 ## Workflow
 
 1. Edit token JSON in `tokens/` — never edit `css/variables.css` directly
-2. Run `npm run build` to validate and regenerate CSS
-3. Update `CHANGELOG.md` under `[Unreleased]`
-4. Open a pull request with a clear summary of token or documentation changes
+2. Run `npm run build` to validate and regenerate CSS + generated artifacts
+3. Run `npm run quality && npm run test` before opening a PR
+4. Update `CHANGELOG.md` under `[Unreleased]`
+5. Open a pull request with a clear summary of token or documentation changes
+
+## Developer platform
+
+- **CLI** — `cli/`; test with `node cli/index.mjs create my-app --no-install`
+- **Templates** — `templates/`; each must import the design system package, not duplicate tokens
+- **Generation** — run `npm run generate` after changing `CSS_VAR_NAME` or token mappings in `scripts/lib/tokens.mjs`
+- **Docs** — platform guides live in `docs/platform/`; generated output in `docs/generated/`
 
 ## Token changes
 
@@ -22,7 +32,7 @@ This repository contains design tokens, CSS variables, Bootstrap theme overrides
 
 ## Documentation
 
-Update relevant docs in `docs/` when changing token architecture, brand rules, or Bootstrap mapping.
+Update relevant docs in `docs/` when changing token architecture, brand rules, or Bootstrap mapping. New tokens and components should document purpose, usage, examples, accessibility, and do/don't guidance per [VISION_AND_SCOPE.md](./docs/VISION_AND_SCOPE.md#documentation).
 
 ## Commits
 

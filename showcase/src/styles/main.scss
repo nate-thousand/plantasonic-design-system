@@ -1,5 +1,10 @@
 @import '@ds/scss/bootstrap-theme';
 @import 'bootstrap/scss/bootstrap';
+@import '@ds/scss/bootstrap-components';
+@import '@ds/scss/bootstrap-utilities';
+@import '@ds/scss/plantasonic-components';
+@import '@ds/scss/navigation-framework';
+@import '@ds/scss/application-shell';
 @import './showcase';
 
 // Typography scale from tokens

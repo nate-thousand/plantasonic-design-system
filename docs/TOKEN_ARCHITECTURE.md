@@ -134,5 +134,8 @@ Tokens originate from Figma Variables (Mode 1 = foundation, Theme 1 = dark, Them
 
 ## Related
 
+- [COLORS.md](./COLORS.md)
+- [TYPOGRAPHY.md](./TYPOGRAPHY.md)
+- [SPACING.md](./SPACING.md)
 - [DESIGN_PRINCIPLES.md](./DESIGN_PRINCIPLES.md)
 - [COMPONENT_MAPPING.md](./COMPONENT_MAPPING.md)

@@ -5,8 +5,19 @@ export type InspectPayload = {
   tag: string;
   classes: string;
   tokens: string[];
+  aliases: string[];
   computed: Record<string, string>;
 };
+
+export function tokenPathsForCssVar(cssVar: string): string[] {
+  return Object.entries(CSS_VAR_MAP)
+    .filter(([, v]) => v === cssVar)
+    .map(([k]) => k);
+}
+
+export function pathToSemanticAlias(path: string): string {
+  return path.replace(/\./g, '/');
+}
 
 export function parseTokens(el: Element): string[] {
   const attr = el.getAttribute('data-ds-tokens');
@@ -42,6 +53,7 @@ export function inspectElement(el: Element): InspectPayload {
     tag: el.tagName.toLowerCase(),
     classes: el.className?.toString?.() ?? '',
     tokens,
+    aliases: tokens.flatMap((t) => tokenPathsForCssVar(t)).map(pathToSemanticAlias),
     computed,
   };
 }
@@ -60,10 +72,16 @@ export function renderInspector(payload: InspectPayload | null): string {
     .map(([k, v]) => `<tr><td>${k}</td><td><code>${v}</code></td></tr>`)
     .join('');
 
+  const aliasRows = payload.aliases.length
+    ? `<div class="mb-2"><strong>Semantic aliases</strong><div class="font-monospace">${payload.aliases.join(', ')}</div></div>`
+    : '';
+
   return `
     <div class="small">
-      <div class="mb-2"><strong>&lt;${payload.tag}&gt;</strong> ${payload.classes ? `<code class="ms-1">${payload.classes}</code>` : ''}</div>
-      ${tokenRows ? `<table class="table table-sm mb-2"><thead><tr><th>Token</th><th>Value</th></tr></thead><tbody>${tokenRows}</tbody></table>` : ''}
+      <div class="mb-2"><strong>&lt;${payload.tag}&gt;</strong></div>
+      ${payload.classes ? `<div class="mb-2"><strong>Bootstrap classes</strong><code class="d-block">${payload.classes}</code></div>` : ''}
+      ${aliasRows}
+      ${tokenRows ? `<table class="table table-sm mb-2"><thead><tr><th>CSS variable</th><th>Value</th></tr></thead><tbody>${tokenRows}</tbody></table>` : ''}
       <table class="table table-sm mb-0"><thead><tr><th>Computed</th><th>Value</th></tr></thead><tbody>${computedRows}</tbody></table>
     </div>`;
 }

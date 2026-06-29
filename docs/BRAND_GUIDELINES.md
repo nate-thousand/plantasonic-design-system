@@ -2,6 +2,8 @@
 
 Plantasonic is a generative audiovisual instrument. The design system reflects that identity: dark, focused, and alive with green energy — like a stage lit for performance, not a marketing landing page.
 
+Read [VISION_AND_SCOPE.md](./VISION_AND_SCOPE.md) for the full vision, inspiration sources, and scope boundaries.
+
 ---
 
 ## Brand Essence
@@ -12,6 +14,15 @@ Plantasonic is a generative audiovisual instrument. The design system reflects t
 | Organic | Green palette, soft glows, rounded controls |
 | Technical | Monospace for status and values; precise spacing |
 | Performable | Large touch targets, keyboard-first, low latency |
+| Quiet confidence | Calm, intentional, handcrafted — not visual spectacle |
+
+---
+
+## Inspiration
+
+The visual language draws from botanical illustration, scientific field journals, museum exhibits, Japanese gardens, Braun/Dieter Rams industrial design, vintage laboratory instruments, modular synthesizers, and architectural wayfinding.
+
+The goal is quiet confidence — not corporate SaaS aesthetics or decorative excess.
 
 ---
 
@@ -71,5 +82,6 @@ Plantasonic wordmark uses the primary green on dark surfaces. On light surfaces,
 
 ## Related
 
+- [VISION_AND_SCOPE.md](./VISION_AND_SCOPE.md)
 - [DESIGN_PRINCIPLES.md](./DESIGN_PRINCIPLES.md)
 - [TOKEN_ARCHITECTURE.md](./TOKEN_ARCHITECTURE.md)

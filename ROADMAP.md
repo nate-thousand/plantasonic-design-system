@@ -2,6 +2,8 @@
 
 Milestone plan for the Plantasonic Design System.
 
+Success is defined in [docs/VISION_AND_SCOPE.md](./docs/VISION_AND_SCOPE.md#success-criteria): every Plantasonic application feels related, Figma/tokens/CSS/components stay synchronized, and the design language scales coherently.
+
 ---
 
 ## Phase 1 — Package Extraction ✅
@@ -37,12 +39,88 @@ Milestone plan for the Plantasonic Design System.
 
 ## Phase 4 — Design System Showcase ✅
 
-**Status:** Complete
+**Status:** Complete (Milestone 1 — foundations + shell)
 
 - Standalone Vite showcase in `showcase/`
-- Token browser, Bootstrap catalog, Plantasonic reference components
-- Theme switcher, token inspector, search, responsive viewport
+- Foundations, theme switcher, token inspector, search, responsive viewport
 - Design validation workflow documented
+
+---
+
+## Phase 4b — Showcase Milestone 2B: Bootstrap Styling Layer ✅
+
+**Status:** Complete — [styling audit](./docs/platform/BOOTSTRAP_STYLING_AUDIT.md) passed 2026-06-28
+
+- Three-layer Bootstrap architecture: `bootstrap-theme` → `bootstrap-components` → `bootstrap-utilities`
+- Generated compile-time token SCSS (`_bootstrap-compile.generated.scss`) — no hardcoded theme values
+- Full interaction states (default, hover, focus, active, selected, disabled) for all Bootstrap components
+- Showcase updated with state labels; dark + light theme validation
+- **Plantasonic app integration deferred** until styling validated in showcase
+- Audit: `docs/platform/BOOTSTRAP_STYLING_AUDIT.md` — 12/12 categories pass; `npm run audit:bootstrap`
+
+---
+
+## Phase 4b — Showcase Milestone 2: Bootstrap Reference ✅
+
+**Status:** Complete
+
+- 12 Bootstrap category pages (buttons, forms, selection, navigation, cards, lists, tables, feedback, disclosure, floating UI, dialogs, utilities)
+- Every component demonstrates interaction states (default, hover, focus, active, disabled)
+- Expanded `scss/css-theme-bridge.scss` — ghost buttons, pills, validation, alerts, badges, popovers
+- Bootstrap overview with coverage checklist and validation criteria
+- Plantasonic components deferred to Milestone 3
+
+---
+
+## Phase 4d — Developer Platform ✅
+
+**Status:** Complete (Milestone 4)
+
+- `plantasonic` CLI — `npx plantasonic create <name> [--template]`
+- Starter templates: `react-vite`, `react-bootstrap`, `nextjs`, `electron` — all consume public `plantasonic-design-system/shell` (no copied layouts)
+- Template validation: `npm run validate:templates`
+- Code generation: CSS vars, SCSS aliases, TypeScript types, token/component docs
+- Build pipeline: `generate`, `docs`, `quality`, `test`, `release`
+- Platform documentation in `docs/platform/`
+- Automated validation: tokens, themes, bootstrap coverage, accessibility contrast
+- Repository standards: AGENTS.md, SECURITY.md, CODE_OF_CONDUCT.md
+
+---
+
+## Phase 4c — Showcase Milestone 3: Plantasonic Components
+
+**Status:** In progress
+
+- Native `.ps-*` instrument components (controls, transport, MIDI, musical, presets, layout, feedback, visual)
+- `scss/plantasonic-components.scss` — token-driven component stylesheet
+- Showcase sections per category
+
+---
+
+## Phase 4c — Showcase Milestone 3.5: Navigation & Workspace Framework ✅
+
+**Status:** Complete
+
+- Reusable app shell, sidebar, navigation rail, top bar, dock, inspector, workspace layouts, panels
+- Command palette (⌘K) and fuzzy search framework
+- Developer configuration API — applications provide nav data, design system renders
+- `scss/navigation-framework.scss` + showcase Navigation section (15 interactive pages)
+- Documentation: [NAVIGATION_FRAMEWORK.md](./docs/platform/NAVIGATION_FRAMEWORK.md)
+
+---
+
+## Phase 4e — Application Shell Framework ✅
+
+**Status:** Complete (Showcase Milestone 4 + public API + template migration)
+
+- Application Shell — app frame, workspace manager, layout engine, dock framework, panel system
+- Overlay manager, notification system, theme provider (dark/light/auto), command registry, keyboard framework
+- Window state persistence (sidebar, dock, theme, workspace layout)
+- Public package export: `plantasonic-design-system/shell` — `renderApplicationShell()`, `bindApplicationShell()`
+- All starter templates consume the public shell API (no copied layouts)
+- `scss/application-shell.scss` + showcase Application Shell section (11 interactive pages)
+- Documentation: [APPLICATION_SHELL.md](./docs/platform/APPLICATION_SHELL.md)
+- Builds on M3.5 Navigation & Workspace Framework
 
 ---
 
@@ -58,9 +136,10 @@ Milestone plan for the Plantasonic Design System.
 
 ## Phase 6 — App Integration
 
-**Status:** Planned
+**Status:** Next (after v1.2.0 release)
 
-- Wire into [Plantasonic app](https://github.com/nate-thousand/plantasonic) as dependency
+- Wire into [Plantasonic app](https://github.com/nate-thousand/plantasonic) as dependency — first real consumer
+- Replace local layouts with public `renderApplicationShell()` API
 - Remove duplicated token definitions from app repo
 
 ---
@@ -97,6 +176,10 @@ Milestone plan for the Plantasonic Design System.
 
 ## Non-Goals
 
+Per [VISION_AND_SCOPE.md](./docs/VISION_AND_SCOPE.md#scope-boundaries):
+
+- An application, dashboard, page builder, or theme gallery (the showcase is documentation tooling, not the design system)
+- A collection of disconnected components or style experiments
 - Application business logic or runtime orchestration
 - Engine aesthetics (ASCII visuals, audio timbres)
 - Engineering workflow templates

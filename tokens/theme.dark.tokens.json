@@ -24,10 +24,10 @@
       "overlay": { "$type": "color", "$value": "{color.surface.input}" }
     },
     "text": {
-      "primary": { "$type": "color", "$value": "{color.green.700}" },
-      "secondary": { "$type": "color", "$value": "{color.neutral.100}" },
-      "muted": { "$type": "color", "$value": "{color.neutral.400}" },
-      "accent": { "$type": "color", "$value": "#4dff89" },
+      "primary": { "$type": "color", "$value": "{color.neutral.100}" },
+      "secondary": { "$type": "color", "$value": "{color.neutral.400}" },
+      "muted": { "$type": "color", "$value": "{color.neutral.500}" },
+      "accent": { "$type": "color", "$value": "{color.green.700}" },
       "link": { "$type": "color", "$value": "{color.accent}" },
       "inverse": { "$type": "color", "$value": "{color.neutral.100}" },
       "on-primary": { "$type": "color", "$value": "#070f0a" },

@@ -6,20 +6,23 @@ Instructions for AI agents building or modifying UI in Plantasonic ecosystem app
 
 ## Before You Generate UI
 
-1. Read `docs/DESIGN_PRINCIPLES.md` — token-driven, Bootstrap, accessibility rules
-2. Read `docs/COMPONENT_MAPPING.md` — use Bootstrap classes, not custom parallel systems
-3. Read `docs/TOKEN_ARCHITECTURE.md` — understand `--ds-*` and `--ps-*` naming
-4. If building Plantasonic shell UI, read `docs/BRAND_GUIDELINES.md`
+1. Read `docs/VISION_AND_SCOPE.md` — purpose, boundaries, decision filter
+2. Read `docs/DESIGN_PRINCIPLES.md` — token-driven, Bootstrap, accessibility rules
+3. Read `docs/COMPONENT_MAPPING.md` — use Bootstrap classes, not custom parallel systems
+4. Read `docs/TOKEN_ARCHITECTURE.md` — understand `--ds-*` and `--ps-*` naming
+5. If building Plantasonic shell UI, read `docs/BRAND_GUIDELINES.md`
 
 ---
 
 ## Core Rules
 
-1. **Token-driven** — reference `--ds-*` / `--ps-*` CSS variables or `$ds-*` SCSS variables. Never hardcode hex, pixel, or millisecond values.
-2. **Bootstrap as engine** — use Bootstrap 5.0.2 classes from `docs/COMPONENT_MAPPING.md`
-3. **Instrument-first** — stage/canvas is the hero; chrome supports without competing
-4. **Accessible by default** — keyboard nav, focus rings, touch targets (2.75rem min), reduced motion
-5. **No engineering content** — do not generate architecture, roadmaps, or deployment config in UI tasks
+1. **Align with vision** — every UI decision must pass the [decision filter](../docs/VISION_AND_SCOPE.md#decision-filter)
+2. **Token-driven** — reference `--ds-*` / `--ps-*` CSS variables or `$ds-*` SCSS variables. Never hardcode hex, pixel, or millisecond values.
+3. **Bootstrap as engine** — use Bootstrap 5.0.2 classes from `docs/COMPONENT_MAPPING.md`
+4. **Interface recedes** — stage/canvas is the hero; chrome supports without competing
+5. **Motion with purpose** — animation communicates state; respect reduced motion
+6. **Accessible by default** — keyboard nav, focus rings, touch targets (2.75rem min), reduced motion
+7. **No engineering content** — do not generate architecture, roadmaps, or deployment config in UI tasks
 
 ---
 
@@ -36,6 +39,7 @@ When setting up a new app or page:
 // Bootstrap theme
 @import 'plantasonic-design-system/scss/bootstrap-theme';
 @import 'bootstrap/scss/bootstrap';
+@import 'plantasonic-design-system/scss/css-theme-bridge'; // when switching themes at runtime
 ```
 
 Set theme on root:
@@ -156,11 +160,14 @@ Before delivering UI:
 - Use status colors for non-status decoration
 - Add decorative gradients to control surfaces
 - Generate parallel component class systems (`.my-button-primary` etc.)
+- Build generic dashboards, theme galleries, or disconnected one-off components
+- Add anything that fails the [decision filter](../docs/VISION_AND_SCOPE.md#decision-filter)
 
 ---
 
 ## Related Files
 
+- [../docs/VISION_AND_SCOPE.md](../docs/VISION_AND_SCOPE.md)
 - [../docs/DESIGN_PRINCIPLES.md](../docs/DESIGN_PRINCIPLES.md)
 - [../docs/COMPONENT_MAPPING.md](../docs/COMPONENT_MAPPING.md)
 - [../docs/TOKEN_ARCHITECTURE.md](../docs/TOKEN_ARCHITECTURE.md)
