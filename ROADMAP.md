@@ -136,7 +136,7 @@ Success is defined in [docs/VISION_AND_SCOPE.md](./docs/VISION_AND_SCOPE.md#succ
 
 ## Phase 6 — App Integration ✅
 
-**Status:** Complete (Plantasonic app v0.2.0 — first consumer)
+**Status:** Complete (Plantasonic app v0.2.2 — first consumer)
 
 - [Plantasonic app](https://github.com/nate-thousand/plantasonic) consumes `plantasonic-design-system/shell`
 - Public `renderApplicationShell()` + `bindApplicationShell()` API in production use
@@ -161,6 +161,29 @@ Success is defined in [docs/VISION_AND_SCOPE.md](./docs/VISION_AND_SCOPE.md#succ
 - WCAG contrast audit for light theme
 - Visual regression snapshots via showcase
 - Theme toggle component spec
+
+---
+
+## Phase 10 — Release & Deployment ✅
+
+**Status:** Complete (v1.2.1)  
+**Date:** 2026-06-28
+
+- [x] Public Application Shell API (`plantasonic-design-system/shell`)
+- [x] Plantasonic app is first consumer (Phase 6 integration)
+- [x] Showcase deployed to Vercel — https://plantasonic-design-system.vercel.app
+- [x] Version tags v1.2.0, v1.2.1 pushed to GitHub
+- [x] 32 automated tests passing; quality gates passing
+
+### Known issues
+
+- Bootstrap SCSS deprecation warnings (Bootstrap 5.0.2 + Dart Sass 3)
+- No npm registry publish yet — consume via GitHub or `file:` dependency
+- CI/GitHub Actions pipeline not yet configured
+
+### Next milestone
+
+Phase 5 — CI/CD pipeline, npm publish, Figma library (Phase 9)
 
 ---
 

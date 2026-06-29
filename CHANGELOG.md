@@ -19,6 +19,12 @@ Patch release — shell TypeScript compatibility for strict consumers and Planta
 
 - **Phase 6 complete** — [Plantasonic app](https://github.com/nate-thousand/plantasonic) is the first consumer of the public Application Shell API
 
+### Deployment
+
+- **Showcase (production):** https://plantasonic-design-system.vercel.app
+- **Build:** `npm run build && npm run showcase:build` → `showcase/dist`
+- **Vercel:** `vercel.json` at repo root
+
 ### Known issues
 
 - Bootstrap SCSS deprecation warnings during build (Bootstrap 5.0.2 + Dart Sass 3)
