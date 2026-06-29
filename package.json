@@ -1,0 +1,38 @@
+{
+  "name": "plantasonic-design-system",
+  "version": "0.2.0",
+  "description": "Design tokens, CSS variables, and Bootstrap theme for the Plantasonic product ecosystem",
+  "license": "UNLICENSED",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "tokens:validate": "node scripts/validate-tokens.mjs",
+    "tokens:build-css": "node scripts/build-css.mjs",
+    "build": "npm run tokens:build-css"
+  },
+  "files": [
+    "tokens",
+    "css",
+    "scss",
+    "docs",
+    "prompts",
+    "scripts"
+  ],
+  "exports": {
+    "./css/variables.css": "./css/variables.css",
+    "./scss/bootstrap-theme.scss": "./scss/bootstrap-theme.scss",
+    "./tokens/foundation.tokens.json": "./tokens/foundation.tokens.json",
+    "./tokens/theme.dark.tokens.json": "./tokens/theme.dark.tokens.json",
+    "./tokens/theme.light.tokens.json": "./tokens/theme.light.tokens.json"
+  },
+  "keywords": [
+    "design-system",
+    "design-tokens",
+    "bootstrap",
+    "plantasonic"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nate-thousand/plantasonic-design-system"
+  }
+}

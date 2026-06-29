@@ -1,0 +1,288 @@
+/**
+ * Plantasonic Bootstrap 5.0.2 theme overrides
+ *
+ * Import order in consuming apps:
+ *   1. @import 'plantasonic-design-system/scss/bootstrap-theme';
+ *   2. @import 'bootstrap/scss/bootstrap';
+ *
+ * For runtime theming, also link css/variables.css and use --ds-* custom properties
+ * in app-specific styles.
+ *
+ * Source tokens: tokens/foundation.tokens.json + tokens/theme.dark.tokens.json
+ */
+
+@use 'sass:color';
+
+// ── Semantic token values (dark theme default) ─────────────────────────────
+
+$ds-color-primary: #00ff57;
+$ds-color-primary-hover: #4dff89;
+$ds-color-primary-pressed: #00cc46;
+$ds-color-primary-disabled: #333333;
+$ds-color-secondary: #4dff89;
+$ds-color-accent: #4dff89;
+
+$ds-color-surface-default: #070f0a;
+$ds-color-surface-app: #070f0a;
+$ds-color-surface-stage: #000000;
+$ds-color-surface-nav: #101c15;
+$ds-color-surface-dock: #101c15;
+$ds-color-surface-input: #333333;
+$ds-color-surface-card: #101c15;
+$ds-color-surface-raised: #1a1a1a;
+$ds-color-surface-raised-hover: #182b20;
+$ds-color-surface-sunken: #050a07;
+$ds-color-surface-overlay: #333333;
+
+$ds-color-text-primary: #4dff89;
+$ds-color-text-secondary: #e5e5e5;
+$ds-color-text-muted: #999999;
+$ds-color-text-accent: #4dff89;
+$ds-color-text-link: #4dff89;
+$ds-color-text-on-primary: #070f0a;
+$ds-color-text-on-secondary: #070f0a;
+
+$ds-color-border-default: rgba(255, 255, 255, 0.14);
+$ds-color-border-subtle: rgba(255, 255, 255, 0.08);
+$ds-color-border-strong: #ffffff;
+$ds-color-border-focus: #4dff89;
+
+$ds-color-overlay-backdrop: rgba(0, 0, 0, 0.65);
+$ds-color-overlay-scrim-light: rgba(255, 255, 255, 0.08);
+$ds-color-overlay-scrim-strong: rgba(255, 255, 255, 0.12);
+
+$ds-color-success: #00ff57;
+$ds-color-warning: #f5c542;
+$ds-color-error: #ff5c5c;
+$ds-color-info: #4dff89;
+
+$ds-font-family-sans: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$ds-font-family-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', monospace;
+$ds-font-size-base: 1rem;
+$ds-font-size-body-sm: 0.875rem;
+$ds-font-size-h4: 1.125rem;
+$ds-font-size-h1: 2rem;
+$ds-font-size-h2: 1.5rem;
+$ds-font-size-h3: 1.25rem;
+$ds-font-size-label: 0.875rem;
+$ds-font-size-caption: 0.75rem;
+$ds-line-height-relaxed: 1.6;
+$ds-headings-font-weight: 600;
+$ds-font-weight-label: 600;
+
+$ds-spacer: 1rem;
+$ds-space-12: 0.75rem;
+$ds-space-3: 1rem;
+
+$ds-radius-default: 0.5rem;
+$ds-radius-sm: 0.25rem;
+$ds-radius-lg: 1rem;
+
+$ds-shadow-sm: 0 4px 12px rgba(0, 255, 87, 0.08);
+$ds-shadow-md: 0 8px 24px rgba(0, 255, 87, 0.1);
+$ds-shadow-lg: 0 16px 48px rgba(0, 255, 87, 0.12);
+$ds-shadow-focus: 0 0 0 0.2rem rgba(77, 255, 137, 0.35);
+$ds-shadow-stage-inset: inset 0 0 48px rgba(0, 0, 0, 0.65);
+
+$ps-slider-track: $ds-color-surface-input;
+$ps-slider-thumb: $ds-color-primary;
+$ps-shadow-sidebar: 4px 0 24px rgba(0, 0, 0, 0.4);
+
+// ── Bootstrap variable overrides ─────────────────────────────────────────────
+
+$primary: $ds-color-primary;
+$secondary: $ds-color-secondary;
+$success: $ds-color-success;
+$info: $ds-color-info;
+$warning: $ds-color-warning;
+$danger: $ds-color-error;
+$light: $ds-color-surface-overlay;
+$dark: $ds-color-surface-nav;
+
+$body-bg: $ds-color-surface-default;
+$body-color: $ds-color-text-primary;
+$border-color: $ds-color-border-default;
+$text-muted: $ds-color-text-muted;
+
+$font-family-sans-serif: $ds-font-family-sans;
+$font-family-monospace: $ds-font-family-mono;
+$font-size-base: $ds-font-size-base;
+$font-size-sm: $ds-font-size-body-sm;
+$font-size-lg: $ds-font-size-h4;
+$line-height-base: $ds-line-height-relaxed;
+$headings-font-weight: $ds-headings-font-weight;
+$headings-color: $ds-color-text-primary;
+$h1-font-size: $ds-font-size-h1;
+$h2-font-size: $ds-font-size-h2;
+$h3-font-size: $ds-font-size-h3;
+$h4-font-size: $ds-font-size-h4;
+
+$spacer: $ds-spacer;
+
+$border-radius: $ds-radius-default;
+$border-radius-sm: $ds-radius-sm;
+$border-radius-lg: $ds-radius-lg;
+$border-radius-pill: 50rem;
+
+$box-shadow: $ds-shadow-md;
+$box-shadow-sm: $ds-shadow-sm;
+$box-shadow-lg: $ds-shadow-lg;
+$box-shadow-inset: $ds-shadow-stage-inset;
+
+$link-color: $ds-color-text-link;
+$link-hover-color: color.adjust($ds-color-text-link, $lightness: 8%);
+$link-decoration: none;
+$link-hover-decoration: underline;
+
+$focus-ring-color: $ds-color-border-focus;
+$focus-ring-width: 0.2rem;
+$focus-ring-opacity: 1;
+
+$btn-font-weight: $ds-font-weight-label;
+$btn-border-radius: $ds-radius-default;
+$btn-border-radius-sm: $ds-radius-sm;
+$btn-border-radius-lg: $ds-radius-lg;
+$btn-primary-color: $ds-color-text-on-primary;
+$btn-primary-bg: $ds-color-primary;
+$btn-primary-border-color: $ds-color-primary;
+$btn-primary-hover-bg: $ds-color-primary-hover;
+$btn-primary-hover-border-color: $ds-color-primary-hover;
+$btn-primary-active-bg: $ds-color-primary-pressed;
+$btn-primary-active-border-color: $ds-color-primary-pressed;
+$btn-primary-disabled-bg: $ds-color-primary-disabled;
+$btn-primary-disabled-border-color: $ds-color-primary-disabled;
+$btn-secondary-color: $ds-color-text-on-secondary;
+$btn-secondary-bg: $ds-color-surface-card;
+$btn-secondary-border-color: $ds-color-border-default;
+$btn-secondary-hover-bg: $ds-color-surface-raised-hover;
+$btn-outline-secondary-color: $ds-color-text-secondary;
+$btn-outline-secondary-border-color: $ds-color-border-strong;
+$btn-outline-secondary-hover-bg: $ds-color-surface-overlay;
+$btn-outline-secondary-hover-color: $ds-color-text-primary;
+$btn-link-color: $ds-color-text-secondary;
+$btn-link-hover-color: $ds-color-text-accent;
+$btn-disabled-opacity: 0.45;
+
+$input-bg: $ds-color-surface-input;
+$input-disabled-bg: $ds-color-surface-sunken;
+$input-color: $ds-color-text-primary;
+$input-border-color: $ds-color-border-default;
+$input-border-radius: $ds-radius-default;
+$input-focus-bg: $ds-color-surface-input;
+$input-focus-border-color: $ds-color-border-focus;
+$input-focus-box-shadow: $ds-shadow-focus;
+$input-placeholder-color: $ds-color-text-muted;
+$form-label-color: $ds-color-text-secondary;
+$form-label-font-size: $ds-font-size-label;
+$form-label-font-weight: $ds-font-weight-label;
+$form-text-color: $ds-color-text-muted;
+$form-check-input-bg: $ds-color-surface-input;
+$form-check-input-border: 1px solid $ds-color-border-default;
+$form-check-input-checked-bg-color: $ds-color-primary;
+$form-check-input-checked-border-color: $ds-color-primary;
+$form-check-input-focus-border: $ds-color-border-focus;
+$form-check-input-focus-box-shadow: $ds-shadow-focus;
+$form-select-bg: $ds-color-surface-input;
+$form-select-border-color: $ds-color-border-default;
+$form-select-color: $ds-color-text-primary;
+$form-select-focus-border-color: $ds-color-border-focus;
+$form-select-focus-box-shadow: $ds-shadow-focus;
+$form-range-track-bg: $ps-slider-track;
+$form-range-track-height: $ds-space-12;
+$form-range-thumb-bg: $ps-slider-thumb;
+$form-range-thumb-active-bg: $ds-color-primary-pressed;
+$form-range-thumb-focus-box-shadow: $ds-shadow-focus;
+
+$card-bg: $ds-color-surface-card;
+$card-border-color: $ds-color-border-default;
+$card-border-radius: $ds-radius-lg;
+$card-cap-bg: transparent;
+$card-cap-color: $ds-color-text-muted;
+$card-color: $ds-color-text-primary;
+
+$navbar-dark-color: $ds-color-text-secondary;
+$navbar-dark-hover-color: $ds-color-text-primary;
+$navbar-dark-active-color: $ds-color-text-accent;
+$navbar-dark-brand-color: $ds-color-text-primary;
+$navbar-dark-bg: $ds-color-surface-nav;
+$navbar-padding-y: $ds-space-12;
+$navbar-padding-x: $ds-space-3;
+
+$nav-link-color: $ds-color-text-secondary;
+$nav-link-hover-color: $ds-color-text-primary;
+$nav-link-disabled-color: $ds-color-text-muted;
+$nav-tabs-border-color: $ds-color-border-subtle;
+$nav-tabs-link-active-color: $ds-color-text-primary;
+$nav-tabs-link-active-bg: $ds-color-surface-overlay;
+$nav-tabs-link-active-border-color: $ds-color-border-subtle;
+
+$dropdown-bg: $ds-color-surface-raised;
+$dropdown-border-color: $ds-color-border-subtle;
+$dropdown-divider-bg: $ds-color-border-subtle;
+$dropdown-link-color: $ds-color-text-secondary;
+$dropdown-link-hover-color: $ds-color-text-primary;
+$dropdown-link-hover-bg: $ds-color-surface-overlay;
+$dropdown-link-active-color: $ds-color-text-primary;
+$dropdown-link-active-bg: $ds-color-surface-overlay;
+$dropdown-box-shadow: $ds-shadow-lg;
+
+$modal-content-bg: $ds-color-surface-raised;
+$modal-content-border-color: $ds-color-border-subtle;
+$modal-content-border-radius: $ds-radius-lg;
+$modal-content-box-shadow-xs: $ds-shadow-lg;
+$modal-content-box-shadow-sm-up: $ds-shadow-lg;
+$modal-backdrop-bg: $ds-color-overlay-backdrop;
+$modal-backdrop-opacity: 1;
+$modal-header-border-color: $ds-color-border-subtle;
+$modal-footer-border-color: $ds-color-border-subtle;
+
+$offcanvas-bg-color: $ds-color-surface-raised;
+$offcanvas-border-color: $ds-color-border-subtle;
+$offcanvas-color: $ds-color-text-primary;
+$offcanvas-box-shadow: $ps-shadow-sidebar;
+
+$tooltip-bg: $ds-color-surface-overlay;
+$tooltip-color: $ds-color-text-primary;
+$tooltip-border-radius: $ds-radius-sm;
+$tooltip-opacity: 1;
+
+$progress-bg: $ds-color-surface-sunken;
+$progress-bar-bg: $ds-color-primary;
+$progress-border-radius: $border-radius-pill;
+$progress-height: 0.5rem;
+
+$alert-border-radius: $ds-radius-default;
+$alert-bg-scale: -80%;
+$alert-border-scale: -70%;
+$alert-color-scale: 40%;
+
+$btn-close-color: $ds-color-text-secondary;
+$btn-close-opacity: 0.75;
+$btn-close-hover-opacity: 1;
+
+$badge-font-size: $ds-font-size-caption;
+$badge-font-weight: $ds-font-weight-label;
+$badge-border-radius: $ds-radius-sm;
+
+$spinner-width: 1.25rem;
+$spinner-height: 1.25rem;
+$spinner-border-width: 0.15em;
+
+$table-bg: transparent;
+$table-color: $ds-color-text-primary;
+$table-border-color: $ds-color-border-subtle;
+$table-striped-bg: $ds-color-overlay-scrim-light;
+$table-hover-bg: $ds-color-overlay-scrim-strong;
+
+$list-group-bg: $ds-color-surface-raised;
+$list-group-border-color: $ds-color-border-subtle;
+$list-group-color: $ds-color-text-secondary;
+$list-group-hover-bg: $ds-color-surface-overlay;
+$list-group-active-bg: $ds-color-surface-overlay;
+$list-group-active-color: $ds-color-text-primary;
+
+$enable-shadows: true;
+$enable-rounded: true;
+$enable-gradients: false;
+$enable-transitions: true;
+$enable-reduced-motion: true;
