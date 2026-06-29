@@ -51,16 +51,49 @@ export function renderBreadcrumbs(items: BreadcrumbItem[]): string {
 export type InternalShellRenderOptions = {
   inspectorWidth?: number;
   shellId?: string;
+  layoutModifiers?: string[];
+  hideInspector?: boolean;
+  hideDock?: boolean;
 };
+
+function shellModifierClasses(config: NavigationConfig, modifiers: string[] = []): string {
+  const fromConfig = config.layout && config.layout !== 'default' ? [config.layout] : [];
+  const unique = [...new Set([...modifiers, ...fromConfig])];
+  return unique.map((mod) => ` ps-shell--${mod}`).join('');
+}
 
 export function renderNavigationFrame(
   config: NavigationConfig,
   workspaceContent: string,
   options: InternalShellRenderOptions = {},
 ): string {
-  const layout = config.layout ?? 'default';
-  const layoutClass = layout === 'default' ? '' : ` ps-shell--${layout}`;
+  const layoutClass = shellModifierClasses(config, options.layoutModifiers);
   const inspectorWidth = options.inspectorWidth ?? 280;
+  const hideInspector = options.hideInspector === true;
+  const hideDock = options.hideDock === true;
+
+  const inspectorToggle = hideInspector
+    ? ''
+    : `<button type="button" class="ps-shell__topbar-action" data-ps-inspector-toggle aria-label="Toggle inspector">
+          <span class="ps-shell__topbar-action-label">Inspector</span>
+        </button>`;
+
+  const inspectorAside = hideInspector
+    ? ''
+    : `<aside class="ps-shell__inspector" aria-label="Inspector" data-ps-inspector style="width:var(--ps-shell-inspector-width)">
+        <div class="ps-section-header">Inspector</div>
+        <p class="small text-muted">Contextual parameters appear here. Applications provide content slots.</p>
+      </aside>`;
+
+  const dockFooter = hideDock
+    ? ''
+    : `<footer class="ps-shell__dock" role="contentinfo">
+        <div class="ps-transport" style="border:0;background:transparent;padding:0;min-height:auto">
+          <button type="button" class="ps-transport-btn ps-transport-btn--primary" aria-label="Play">▶</button>
+          <button type="button" class="ps-transport-btn" aria-label="Stop">■</button>
+        </div>
+        <div class="ps-shell__status"><span class="ps-status-dot ps-status-dot--active"></span> Ready</div>
+      </footer>`;
 
   return `
     <div class="ps-shell${layoutClass}" data-ps-shell data-shell-id="${escapeHtml(options.shellId ?? 'default')}" style="--ps-shell-inspector-width:${inspectorWidth}px" data-ds-tokens="--ps-nav-height,--ps-dock-height,--ps-sidebar-width">
@@ -76,24 +109,13 @@ export function renderNavigationFrame(
         <button type="button" class="ps-shell__topbar-action" data-ps-command-trigger aria-label="Command palette">
           <span class="ps-shell__topbar-action-label">Commands</span> <kbd>⌘K</kbd>
         </button>
-        <button type="button" class="ps-shell__topbar-action" data-ps-inspector-toggle aria-label="Toggle inspector">
-          <span class="ps-shell__topbar-action-label">Inspector</span>
-        </button>
+        ${inspectorToggle}
         <div class="ps-shell__topbar-action" aria-label="Profile slot" style="cursor:default">◎</div>
       </header>
       <nav class="ps-shell__sidebar" aria-label="Main navigation">${renderNavGroups(config.groups)}</nav>
       <main class="ps-shell__main" role="main">${workspaceContent}</main>
-      <aside class="ps-shell__inspector" aria-label="Inspector" data-ps-inspector style="width:var(--ps-shell-inspector-width)">
-        <div class="ps-section-header">Inspector</div>
-        <p class="small text-muted">Contextual parameters appear here. Applications provide content slots.</p>
-      </aside>
-      <footer class="ps-shell__dock" role="contentinfo">
-        <div class="ps-transport" style="border:0;background:transparent;padding:0;min-height:auto">
-          <button type="button" class="ps-transport-btn ps-transport-btn--primary" aria-label="Play">▶</button>
-          <button type="button" class="ps-transport-btn" aria-label="Stop">■</button>
-        </div>
-        <div class="ps-shell__status"><span class="ps-status-dot ps-status-dot--active"></span> Ready</div>
-      </footer>
+      ${inspectorAside}
+      ${dockFooter}
     </div>`;
 }
 

@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.2] — 2026-06-28
+
+### Fixed
+
+- **Shell layout modifiers** — `regions.inspector: false` and `regions.dock: false` now apply both `inspector-hidden` and `no-dock` classes (previously only the first modifier was used)
+- **Shell render** — omit inspector column, dock footer, and inspector toggle when regions are disabled
+
 ## [1.2.1] — 2026-06-28
 
 Patch release — shell TypeScript compatibility for strict consumers and Plantasonic app integration complete.

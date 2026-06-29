@@ -27,9 +27,9 @@ export function renderApplicationShell(config: Partial<ApplicationShellConfig> =
   const workspaceMode = merged.workspace ?? state?.workspaceMode ?? 'single';
   const layoutMods = resolveLayoutFromState(state);
   if (merged.regions?.inspector === false) layoutMods.push('inspector-hidden');
+  if (merged.regions?.dock === false) layoutMods.push('no-dock');
 
-  const layoutValue = (layoutMods[0] ?? navWithRoutes.layout ?? 'default') as ShellLayout;
-  const nav: typeof navWithRoutes = { ...navWithRoutes, layout: layoutValue };
+  const nav: typeof navWithRoutes = { ...navWithRoutes };
 
   if (state?.theme || merged.theme) {
     initShellTheme(state?.theme ?? merged.theme ?? 'dark');
@@ -45,6 +45,9 @@ export function renderApplicationShell(config: Partial<ApplicationShellConfig> =
   const shellHtml =
     renderNavigationFrame(nav, workspace, {
       shellId,
+      layoutModifiers: layoutMods,
+      hideInspector: merged.regions?.inspector === false,
+      hideDock: merged.regions?.dock === false,
       ...(state?.inspectorWidth !== undefined ? { inspectorWidth: state.inspectorWidth } : {}),
     }) + renderCommandPalette(commands);
 
