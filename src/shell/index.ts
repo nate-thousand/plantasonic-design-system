@@ -1,4 +1,4 @@
-import type { ApplicationShellConfig } from './types';
+import type { ApplicationShellConfig, ShellLayout } from './types';
 import { mergeShellConfig } from './config';
 import { mergeRoutesIntoNavigation } from './routes';
 import {
@@ -28,10 +28,8 @@ export function renderApplicationShell(config: Partial<ApplicationShellConfig> =
   const layoutMods = resolveLayoutFromState(state);
   if (merged.regions?.inspector === false) layoutMods.push('inspector-hidden');
 
-  const nav = {
-    ...navWithRoutes,
-    layout: (layoutMods[0] ?? navWithRoutes.layout ?? 'default') as typeof navWithRoutes.layout,
-  };
+  const layoutValue = (layoutMods[0] ?? navWithRoutes.layout ?? 'default') as ShellLayout;
+  const nav: typeof navWithRoutes = { ...navWithRoutes, layout: layoutValue };
 
   if (state?.theme || merged.theme) {
     initShellTheme(state?.theme ?? merged.theme ?? 'dark');
@@ -46,8 +44,8 @@ export function renderApplicationShell(config: Partial<ApplicationShellConfig> =
   const commands = merged.commands ?? nav.commands ?? [];
   const shellHtml =
     renderNavigationFrame(nav, workspace, {
-      inspectorWidth: state?.inspectorWidth,
       shellId,
+      ...(state?.inspectorWidth !== undefined ? { inspectorWidth: state.inspectorWidth } : {}),
     }) + renderCommandPalette(commands);
 
   const docks = (merged.docks ?? []).filter((d) => d.position !== 'bottom');

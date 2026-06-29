@@ -1,17 +1,14 @@
-# Release 1.2.0
+# Release 1.2.1
 
-Developer platform release — public Application Shell API, CLI, starter templates, navigation framework, and Bootstrap styling layer.
+Patch release — shell TypeScript strictness fixes; Plantasonic app is first consumer.
 
-See [CHANGELOG.md](../CHANGELOG.md#120--2026-06-28) for full details.
+See [CHANGELOG.md](../CHANGELOG.md#121--2026-06-28).
 
 ## Highlights
 
-- Public Application Shell API at `plantasonic-design-system/shell`
-- CLI: `npx plantasonic create my-app` with four starter templates
-- Navigation & Workspace Framework + Application Shell showcase sections
-- Bootstrap styling layer with audit tooling
-- 32 automated tests; template build validation
+- Shell API compatible with strict TypeScript consumers
+- Phase 6 complete — Plantasonic app integration
 
 ## Next milestone
 
-Plantasonic app integration as the first real consumer.
+Phase 5 — CI & Quality Gates (GitHub Actions)

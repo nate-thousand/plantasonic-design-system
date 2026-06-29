@@ -7,6 +7,6 @@ export function mergeShellConfig(config: Partial<ApplicationShellConfig> = {}): 
     ...config,
     navigation: { ...EXAMPLE_SHELL.navigation, ...config.navigation },
     regions: { ...EXAMPLE_SHELL.regions, ...config.regions },
-    commands: config.commands ?? config.navigation?.commands ?? EXAMPLE_SHELL.commands,
+    commands: config.commands ?? config.navigation?.commands ?? EXAMPLE_SHELL.commands ?? [],
   };
 }

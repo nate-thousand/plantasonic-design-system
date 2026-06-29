@@ -14,10 +14,13 @@ function findNavItem(items: NavItemConfig[], id: string): NavItemConfig | undefi
 function cloneGroups(groups: NavGroupConfig[]): NavGroupConfig[] {
   return groups.map((g) => ({
     ...g,
-    items: g.items.map((item) => ({
-      ...item,
-      children: item.children?.map((c) => ({ ...c })),
-    })),
+    items: g.items.map((item) => {
+      const cloned: NavItemConfig = { ...item };
+      if (item.children?.length) {
+        cloned.children = item.children.map((c) => ({ ...c }));
+      }
+      return cloned;
+    }),
   }));
 }
 

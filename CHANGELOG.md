@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.1] — 2026-06-28
+
+Patch release — shell TypeScript compatibility for strict consumers and Plantasonic app integration complete.
+
+### Fixed
+
+- **Shell TypeScript strictness** — `exactOptionalPropertyTypes` compatibility in `src/shell/` (config merge, routes clone, panel states, theme cycle, render options)
+
+### Changed
+
+- **Phase 6 complete** — [Plantasonic app](https://github.com/nate-thousand/plantasonic) is the first consumer of the public Application Shell API
+
+### Known issues
+
+- Bootstrap SCSS deprecation warnings during build (Bootstrap 5.0.2 + Dart Sass 3)
+- No npm registry publish yet — consume via GitHub or `file:` dependency
+- CI/GitHub Actions pipeline not yet configured (Phase 5)
+
 ## [1.2.0] — 2026-06-28
 
 Developer platform release — public Application Shell API, CLI, starter templates, navigation framework, and Bootstrap styling layer.

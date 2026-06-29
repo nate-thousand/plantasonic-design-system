@@ -105,10 +105,11 @@ export function renderAppFrame(options: {
 }
 
 export function applyPanelStates(panels: PanelConfig[], panelStates: Record<string, PanelState>): PanelConfig[] {
-  return panels.map((p) => ({
-    ...p,
-    state: panelStates[p.id] ?? p.state,
-  }));
+  return panels.map((p) => {
+    const nextState = panelStates[p.id] ?? p.state;
+    if (nextState !== undefined) return { ...p, state: nextState };
+    return { ...p };
+  });
 }
 
 export function resolveLayoutFromState(state: ShellWindowState | null): string[] {

@@ -27,7 +27,7 @@ export function initShellTheme(mode: ThemeMode = getShellTheme()): ResolvedTheme
 export function cycleShellTheme(): ThemeMode {
   const order: ThemeMode[] = ['dark', 'light', 'auto'];
   const current = getShellTheme();
-  const next = order[(order.indexOf(current) + 1) % order.length];
+  const next = order[(order.indexOf(current) + 1) % order.length] ?? 'dark';
   setShellTheme(next);
   return next;
 }

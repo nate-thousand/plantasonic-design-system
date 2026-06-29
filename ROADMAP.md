@@ -134,13 +134,13 @@ Success is defined in [docs/VISION_AND_SCOPE.md](./docs/VISION_AND_SCOPE.md#succ
 
 ---
 
-## Phase 6 — App Integration
+## Phase 6 — App Integration ✅
 
-**Status:** Next (after v1.2.0 release)
+**Status:** Complete (Plantasonic app v0.2.0 — first consumer)
 
-- Wire into [Plantasonic app](https://github.com/nate-thousand/plantasonic) as dependency — first real consumer
-- Replace local layouts with public `renderApplicationShell()` API
-- Remove duplicated token definitions from app repo
+- [Plantasonic app](https://github.com/nate-thousand/plantasonic) consumes `plantasonic-design-system/shell`
+- Public `renderApplicationShell()` + `bindApplicationShell()` API in production use
+- No duplicated token definitions in app repo
 
 ---
 

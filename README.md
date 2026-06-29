@@ -2,7 +2,9 @@
 
 Centralized design tokens, CSS variables, Bootstrap theme, Application Shell, CLI, and starter templates for the [Plantasonic](https://github.com/nate-thousand/plantasonic) product ecosystem.
 
-**Current release:** v1.2.0
+**Current release:** v1.2.1
+
+**Showcase (production):** https://plantasonic-design-system.vercel.app
 
 This repository is the single source of truth for visual identity — product apps consume this package instead of duplicating token definitions.
 
