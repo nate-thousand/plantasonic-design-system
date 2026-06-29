@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] — 2026-06-28
+
+### Added
+
+- **Design System Showcase** — standalone Vite app in `showcase/`
+- Interactive token browser, Bootstrap component catalog, Plantasonic reference components
+- Theme switcher (dark/light), token inspector, search, responsive viewport preview
+- Developer panel with version, build timestamp, token counts
+- npm scripts: `showcase:dev`, `showcase:build`, `showcase:preview`
+- Design validation workflow in README
+
 ## [1.0.0] — 2026-06-28
 
 Initial public release of the Plantasonic Design System.

@@ -1,6 +1,6 @@
 {
   "name": "plantasonic-design-system",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Centralized design tokens, CSS variables, and Bootstrap theme for the Plantasonic product ecosystem",
   "author": "Nate Thousand",
   "license": "MIT",
@@ -8,7 +8,10 @@
   "scripts": {
     "tokens:validate": "node scripts/validate-tokens.mjs",
     "tokens:build-css": "node scripts/build-css.mjs",
-    "build": "npm run tokens:build-css && npm run tokens:validate"
+    "build": "npm run tokens:build-css && npm run tokens:validate",
+    "showcase:dev": "npm run dev --prefix showcase",
+    "showcase:build": "npm run build --prefix showcase",
+    "showcase:preview": "npm run preview --prefix showcase"
   },
   "files": [
     "tokens",
@@ -23,7 +26,11 @@
   ],
   "exports": {
     "./css/variables.css": "./css/variables.css",
-    "./scss/bootstrap-theme.scss": "./scss/bootstrap-theme.scss",
+    "./scss/bootstrap-theme.scss": {
+      "sass": "./scss/bootstrap-theme.scss",
+      "style": "./scss/bootstrap-theme.scss",
+      "default": "./scss/bootstrap-theme.scss"
+    },
     "./tokens/foundation.tokens.json": "./tokens/foundation.tokens.json",
     "./tokens/theme.dark.tokens.json": "./tokens/theme.dark.tokens.json",
     "./tokens/theme.light.tokens.json": "./tokens/theme.light.tokens.json"

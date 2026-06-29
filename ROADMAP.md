@@ -35,27 +35,37 @@ Milestone plan for the Plantasonic Design System.
 
 ---
 
-## Phase 4 — CI & Quality Gates
+## Phase 4 — Design System Showcase ✅
 
-**Status:** Next
+**Status:** Complete
 
-- GitHub Actions workflow: validate + build on every PR
-- Verify committed `css/variables.css` matches build output
-- JSON schema validation for token files
+- Standalone Vite showcase in `showcase/`
+- Token browser, Bootstrap catalog, Plantasonic reference components
+- Theme switcher, token inspector, search, responsive viewport
+- Design validation workflow documented
 
 ---
 
-## Phase 5 — App Integration
+## Phase 5 — CI & Quality Gates
+
+**Status:** Next
+
+- GitHub Actions: validate + build on every PR
+- Verify committed `css/variables.css` matches build output
+- Showcase build in CI
+
+---
+
+## Phase 6 — App Integration
 
 **Status:** Planned
 
 - Wire into [Plantasonic app](https://github.com/nate-thousand/plantasonic) as dependency
 - Remove duplicated token definitions from app repo
-- Document migration path for existing consumers
 
 ---
 
-## Phase 6 — Figma Sync
+## Phase 7 — Figma Sync
 
 **Status:** Planned
 
@@ -65,22 +75,12 @@ Milestone plan for the Plantasonic Design System.
 
 ---
 
-## Phase 7 — Component Specs
-
-**Status:** Planned
-
-- Control factory patterns (Button, Slider, Toggle, etc.)
-- Pattern specs: overlays, performance mode, instrument shell
-- Static HTML component gallery or Storybook
-
----
-
 ## Phase 8 — Light Theme Validation
 
 **Status:** Planned
 
 - WCAG contrast audit for light theme
-- Visual regression snapshots for both themes
+- Visual regression snapshots via showcase
 - Theme toggle component spec
 
 ---

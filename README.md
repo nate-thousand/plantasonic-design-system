@@ -47,24 +47,62 @@ No npm dependencies are required to build this package — only Node.js 18+.
 
 ---
 
+## Design System Showcase
+
+The **Showcase** is the canonical visual reference for every Plantasonic application. It is documentation, design review tool, component explorer, and regression baseline — not a product app.
+
+```bash
+# Install showcase dependencies (first time)
+cd showcase && npm install
+
+# Development server
+npm run showcase:dev
+
+# Production build
+npm run showcase:build
+
+# Preview production build
+npm run showcase:preview
+```
+
+Open `http://localhost:5173` after running `showcase:dev`.
+
+### What the showcase includes
+
+- **Foundations** — colors, typography, spacing, radius, shadows, motion
+- **Bootstrap reference** — every Bootstrap 5.0.2 component with Plantasonic theme
+- **Plantasonic components** — reference implementations (dock, stage, presets, transport, etc.)
+- **Theme switcher** — dark/light with instant CSS variable reload
+- **Token inspector** — click any demo to see tokens and computed styles
+- **Search** — tokens, components, CSS variables, Bootstrap classes
+- **Responsive preview** — desktop, tablet, mobile, resizable viewport
+- **Accessibility** — focus, contrast, reduced motion preview
+
+### Design validation workflow
+
+Before implementing UI in any Plantasonic application:
+
+1. Find the matching section in the showcase
+2. Match token usage and layout patterns exactly
+3. Switch themes and verify both dark and light
+4. Compare your implementation side-by-side with the showcase
+5. Do not ship UI that diverges without explicit design review
+
+The showcase imports **only** from this repository (`css/variables.css`, `scss/bootstrap-theme.scss`, `tokens/*.json`). No Plantasonic app code is imported.
+
+---
+
 ## Repository Structure
 
 ```text
 plantasonic-design-system/
 ├── tokens/                  W3C Design Tokens JSON (source of truth)
-│   ├── foundation.tokens.json
-│   ├── theme.dark.tokens.json
-│   └── theme.light.tokens.json
-├── css/
-│   └── variables.css        Generated CSS custom properties
-├── scss/
-│   └── bootstrap-theme.scss Bootstrap 5.0.2 variable overrides
-├── scripts/                 Token validation and CSS build pipeline
-├── docs/                    Brand, principles, architecture, mapping
-├── prompts/                 AI agent application instructions
-├── LICENSE
-├── CHANGELOG.md
-├── ROADMAP.md
+├── css/variables.css        Generated CSS custom properties
+├── scss/bootstrap-theme.scss
+├── scripts/                 Token build pipeline
+├── showcase/                Design system showcase app (Vite)
+├── docs/                    Brand, principles, architecture
+├── prompts/                 AI agent instructions
 └── package.json
 ```
 
