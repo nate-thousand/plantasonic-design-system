@@ -1,14 +1,14 @@
 {
   "name": "plantasonic-design-system",
-  "version": "0.2.0",
-  "description": "Design tokens, CSS variables, and Bootstrap theme for the Plantasonic product ecosystem",
-  "license": "UNLICENSED",
-  "private": true,
+  "version": "1.0.0",
+  "description": "Centralized design tokens, CSS variables, and Bootstrap theme for the Plantasonic product ecosystem",
+  "author": "Nate Thousand",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "tokens:validate": "node scripts/validate-tokens.mjs",
     "tokens:build-css": "node scripts/build-css.mjs",
-    "build": "npm run tokens:build-css"
+    "build": "npm run tokens:build-css && npm run tokens:validate"
   },
   "files": [
     "tokens",
@@ -16,7 +16,10 @@
     "scss",
     "docs",
     "prompts",
-    "scripts"
+    "scripts",
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md"
   ],
   "exports": {
     "./css/variables.css": "./css/variables.css",
@@ -28,11 +31,19 @@
   "keywords": [
     "design-system",
     "design-tokens",
+    "css-variables",
     "bootstrap",
-    "plantasonic"
+    "bootstrap-theme",
+    "plantasonic",
+    "dark-theme",
+    "w3c-design-tokens"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/nate-thousand/plantasonic-design-system"
-  }
+    "url": "git+https://github.com/nate-thousand/plantasonic-design-system.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nate-thousand/plantasonic-design-system/issues"
+  },
+  "homepage": "https://github.com/nate-thousand/plantasonic-design-system#readme"
 }

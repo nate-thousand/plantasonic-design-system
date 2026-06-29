@@ -11,9 +11,16 @@ try {
   const css = buildVariablesCss();
   writeFileSync(CSS_OUTPUT, css, 'utf8');
 
+  const postBuild = validateTokens();
+  if (!postBuild.ok) {
+    console.error('Post-build validation failed.');
+    process.exit(1);
+  }
+
   console.log('✓ Generated css/variables.css');
-  console.log(`  CSS variables: ${validation.cssVarCount}`);
+  console.log(`  CSS variables: ${postBuild.cssVarCount}`);
   console.log(`  Light theme overrides: ${countLightOverrides(css)}`);
+  console.log('✓ Post-build validation passed');
 } catch (error) {
   console.error(error instanceof Error ? error.message : error);
   process.exit(1);

@@ -1,6 +1,6 @@
 # Roadmap
 
-Milestone plan for the Plantasonic Design System package.
+Milestone plan for the Plantasonic Design System.
 
 ---
 
@@ -8,12 +8,10 @@ Milestone plan for the Plantasonic Design System package.
 
 **Status:** Complete
 
-- Standalone repo scaffold with tokens, CSS, SCSS, and docs
+- Standalone repo with tokens, CSS, SCSS, and docs
 - Foundation + dark/light theme token files
-- CSS custom properties for runtime theming
 - Bootstrap 5.0.2 theme overrides
 - Brand guidelines, design principles, token architecture, component mapping
-- AI application prompt
 
 ---
 
@@ -21,18 +19,43 @@ Milestone plan for the Plantasonic Design System package.
 
 **Status:** Complete
 
-- Token build script: `tokens/*.json` → `css/variables.css`
-- Alias validation before write (`npm run tokens:validate`)
+- Token build: `tokens/*.json` → `css/variables.css`
+- Alias validation (`npm run tokens:validate`)
 - npm scripts: `tokens:validate`, `tokens:build-css`, `build`
-
-**Remaining:**
-
-- CI verification that generated CSS matches committed output
-- npm publish or git submodule consumption path for Plantasonic app
 
 ---
 
-## Phase 3 — Figma Sync
+## Phase 3 — GitHub Publish ✅
+
+**Status:** Complete
+
+- Production README, LICENSE, CONTRIBUTING
+- Package metadata for npm/GitHub consumption
+- Initial public release (v1.0.0)
+
+---
+
+## Phase 4 — CI & Quality Gates
+
+**Status:** Next
+
+- GitHub Actions workflow: validate + build on every PR
+- Verify committed `css/variables.css` matches build output
+- JSON schema validation for token files
+
+---
+
+## Phase 5 — App Integration
+
+**Status:** Planned
+
+- Wire into [Plantasonic app](https://github.com/nate-thousand/plantasonic) as dependency
+- Remove duplicated token definitions from app repo
+- Document migration path for existing consumers
+
+---
+
+## Phase 6 — Figma Sync
 
 **Status:** Planned
 
@@ -42,17 +65,17 @@ Milestone plan for the Plantasonic Design System package.
 
 ---
 
-## Phase 4 — Component Specs
+## Phase 7 — Component Specs
 
 **Status:** Planned
 
-- Document control factory patterns (Button, Slider, Toggle, etc.)
-- Pattern specs: overlays, performance mode, instrument shell layout
-- Storybook or static HTML component gallery
+- Control factory patterns (Button, Slider, Toggle, etc.)
+- Pattern specs: overlays, performance mode, instrument shell
+- Static HTML component gallery or Storybook
 
 ---
 
-## Phase 5 — Light Theme Validation
+## Phase 8 — Light Theme Validation
 
 **Status:** Planned
 
@@ -62,7 +85,7 @@ Milestone plan for the Plantasonic Design System package.
 
 ---
 
-## Phase 6 — Figma Library
+## Phase 9 — Figma Library
 
 **Status:** Planned
 
@@ -76,4 +99,4 @@ Milestone plan for the Plantasonic Design System package.
 
 - Application business logic or runtime orchestration
 - Engine aesthetics (ASCII visuals, audio timbres)
-- Engineering workflow templates (see `ai-product-framework`)
+- Engineering workflow templates
