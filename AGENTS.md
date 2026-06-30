@@ -14,6 +14,10 @@ This repo is the **Plantasonic Design System** — tokens, Bootstrap theme, show
 - Follow [Vision and Scope](./docs/VISION_AND_SCOPE.md) as the decision filter
 - Use existing patterns: `scripts/lib/tokens.mjs`, `@ds` alias, `data-theme` switching
 
+## Version
+
+**1.0.0 — stable.** No new architectural layers in 1.x. Public API: `generated/api-surface.json`.
+
 ## Do not
 
 - Modify Plantasonic product applications unless explicitly requested
@@ -30,8 +34,14 @@ npm run generate           # types, scss, token/component docs
 npm run docs               # documentation index
 npm run quality            # validation gate
 npm run test               # node:test suite
+npm run validate:prototypes # all 12 prototype scaffolds
+npm run generate:ecosystem-context # ecosystem AI context export
+npm run validate:examples  # 7 reference example specs
+npm run audit:platform     # API surface + platform audit
 npm run showcase:dev       # visual reference at :5173
-node cli/index.mjs create my-app --no-install
+npm run tokens:import-figma # sync tokens from tokens/figma-source/
+node cli/index.mjs create generative-art my-study --no-install
+node cli/index.mjs spec "Generative art study" --name "Study"
 ```
 
 ## Architecture
@@ -50,6 +60,10 @@ tokens → scripts/lib/tokens.mjs → css/variables.css + scss/
 | CLI | `cli/` |
 | Starters | `templates/` |
 | Visual reference | `showcase/` |
+| AI layer | `src/ai/`, `generated/ai/` |
+| Prototype layer | `src/prototype/` |
+| Platform layer | `src/platform/`, `generated/ecosystem/` |
+| Creative Studio | `src/studio/`, `generated/studio/` |
 | Platform docs | `docs/platform/` |
 
 ## Commit style

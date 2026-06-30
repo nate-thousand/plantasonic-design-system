@@ -222,3 +222,12 @@ export const EXAMPLE_SHELL: ApplicationShellConfig = {
     { id: 'mixer', path: '/mixer', label: 'Mixer' },
   ],
 };
+
+/** Showcase / docs demo — no persisted state, single workspace, inspector hidden. */
+export const SHOWCASE_SHELL: ApplicationShellConfig = {
+  ...EXAMPLE_SHELL,
+  id: 'showcase-shell-demo',
+  persistState: false,
+  workspace: 'single',
+  regions: { ...DEFAULT_REGIONS, inspector: false },
+};

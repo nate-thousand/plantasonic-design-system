@@ -30,7 +30,12 @@
     "showcase:preview": "npm run preview --prefix showcase",
     "showcase": "npm run showcase:dev",
     "lint": "node scripts/quality-check.mjs",
-    "format": "node -e \"console.log('No formatter configured — use editor defaults')\""
+    "format": "node -e \"console.log('No formatter configured \u2014 use editor defaults')\"",
+    "tokens:import-figma": "node scripts/import-figma-tokens.mjs",
+    "demo:dev": "npm run dev --prefix demo",
+    "demo:build": "npm run build --prefix demo",
+    "demo:preview": "npm run preview --prefix demo",
+    "demo": "npm run demo:dev"
   },
   "files": [
     "tokens",

@@ -2,11 +2,13 @@
 
 Centralized design tokens, CSS variables, Bootstrap theme, Application Shell, CLI, and starter templates for the [Plantasonic](https://github.com/nate-thousand/plantasonic) product ecosystem.
 
-**Current release:** v1.2.1
+**Current release:** v1.0.0
 
 **Showcase (production):** https://plantasonic-design-system.vercel.app
 
 This repository is the single source of truth for visual identity — product apps consume this package instead of duplicating token definitions.
+
+> **Platform status:** v1.0.0 stable. Public APIs frozen. Future work is application development and ecosystem expansion.
 
 **Start here:** [Vision and Scope](./docs/VISION_AND_SCOPE.md) defines the purpose, boundaries, and decision filter for every change to this system.
 
@@ -92,6 +94,8 @@ npm run audit:bootstrap       # CSS var resolution + hardcoded value scan
 npm run quality               # full validation gate
 npm run test                  # automated tests
 npm run release -- patch      # semver bump + release notes
+npm run validate:examples     # 7 reference example specs
+npm run audit:platform        # API surface + platform audit
 npm run showcase              # alias for showcase:dev
 npm run tokens:watch          # rebuild CSS on token changes
 ```
@@ -116,6 +120,171 @@ import {
 
 Navigation infrastructure is internal — apps configure `ApplicationShellConfig` only. See [APPLICATION_SHELL.md](./docs/platform/APPLICATION_SHELL.md).
 
+### Platform layers (public API)
+
+Additive, framework-agnostic layers that render HTML strings styled by token-driven SCSS:
+
+```typescript
+import { stack, grid, sidebar } from 'plantasonic-design-system/primitives'; // Layer 9
+import { button, card, panel } from 'plantasonic-design-system/components';   // Layer 1
+import { animate, prefersReducedMotion } from 'plantasonic-design-system/motion'; // Layer 3
+```
+
+```scss
+@import 'plantasonic-design-system/scss/primitives';
+@import 'plantasonic-design-system/scss/components';
+@import 'plantasonic-design-system/scss/motion';
+```
+
+- [Layout Primitives](./docs/platform/LAYOUT_PRIMITIVES.md) — composable building blocks
+- [Component Library](./docs/platform/COMPONENT_LIBRARY.md) — reusable UI components
+- [Motion System](./docs/platform/MOTION_SYSTEM.md) — token-driven motion + presets
+
+These are part of the [Application Platform initiative](./ROADMAP.md#phase-11--application-platform).
+
+### Creative Application Framework (v1.4+)
+
+A reusable framework for **immersive creative software** (music, visual, video,
+VJ, lighting, generative/AI, creative coding, installation, simulation,
+performance) — an additive `instrument` shell variant, standardized regions,
+transport, canvas mounts, inspector + status registries, floating panels,
+display modes, a unified input layer, and a `createApplication()` SDK.
+
+```typescript
+import { createApplication } from 'plantasonic-design-system/app';
+import { renderCanvasMount, METRIC_PRESETS } from 'plantasonic-design-system/instrument';
+
+const app = createApplication({ title: 'My Instrument' });
+app.registerWorkspace({ id: 'main', render: () => renderCanvasMount() })
+   .registerStatus([METRIC_PRESETS.fps(() => 60)]);
+await app.mount(document.getElementById('root'));
+```
+
+```scss
+@import 'plantasonic-design-system/scss/instrument';
+```
+
+- [Creative Application Guide](./docs/platform/CREATIVE_APPLICATION_GUIDE.md) — start here
+- [Instrument Shell](./docs/platform/INSTRUMENT_SHELL_GUIDE.md) · [Workspace](./docs/platform/WORKSPACE_GUIDE.md) · [Panels](./docs/platform/PANEL_GUIDE.md) · [Transport](./docs/platform/TRANSPORT_GUIDE.md) · [Canvas](./docs/platform/CANVAS_GUIDE.md)
+- [Presentation Mode](./docs/platform/PRESENTATION_MODE_GUIDE.md) · [Touch Mode](./docs/platform/TOUCH_MODE_GUIDE.md) · [Application Architecture](./docs/platform/APPLICATION_ARCHITECTURE_GUIDE.md)
+
+### AI-Native Platform (Phase 13)
+
+The Design System is the authoritative, **machine-readable** source of truth.
+Every component, layout, pattern, token, and theme registers structured metadata
+so applications and AI agents discover, generate, validate, document, and govern
+UI through one stable SDK — not the filesystem.
+
+```typescript
+import {
+  getComponents,
+  getTokens,
+  getKnowledgeGraph,
+  getImpact,
+  validateApplication,
+  generateComponent,
+} from 'plantasonic-design-system/ai';
+
+const report = validateApplication([{ path: 'app.css', content }]); // compliance
+const impact = getImpact('token.color.primary.default');            // impact analysis
+const files = generateComponent({ name: 'level-meter' });           // scaffolding
+```
+
+Non-TypeScript consumers read the published context export:
+
+```typescript
+import manifest from 'plantasonic-design-system/generated/ai/index.json' assert { type: 'json' };
+```
+
+- [AI Architecture](./docs/platform/AI_ARCHITECTURE.md) — start here · [Metadata Specification](./docs/platform/METADATA_SPECIFICATION.md) · [Registry](./docs/platform/REGISTRY_GUIDE.md)
+- [Validation](./docs/platform/VALIDATION_GUIDE.md) · [Generators](./docs/platform/GENERATOR_GUIDE.md) · [Plugins](./docs/platform/PLUGIN_GUIDE.md) · [Application Compliance](./docs/platform/APPLICATION_COMPLIANCE_GUIDE.md)
+
+```bash
+npm run ai:context   # regenerate generated/ai/*.json + docs/generated/ai/*.md
+```
+
+### AI Prototype Platform (Phase 14)
+
+Scaffold prototypes that inherit the full Design System in one command:
+
+```bash
+npx plantasonic create generative-art flower-study
+npx plantasonic spec "Audio reactive installation with MIDI" --name "Bloom Room"
+```
+
+```typescript
+import { createProject } from 'plantasonic-design-system/platform';
+
+createProject({
+  type: 'audio-reactive-installation',
+  name: 'Bloom Room',
+  sound: true,
+  midi: true,
+  touch: true,
+});
+// Adds platform.json, docs/PLATFORM.md, src/platform/services.ts, engine deps
+```
+
+- [Prototype Platform Guide](./docs/platform/PROTOTYPE_PLATFORM_GUIDE.md) · [CLI](./docs/platform/CLI_GUIDE.md) · [AI Spec](./docs/platform/AI_SPEC_GUIDE.md) · [SDK](./docs/platform/PROTOTYPE_SDK_GUIDE.md)
+
+### Unified Creative Ecosystem (Phase 15)
+
+Every application is a lightweight client — install engines, reference shared assets, invoke workflows, use platform services:
+
+```typescript
+import {
+  createProject,
+  installEngine,
+  registerAsset,
+  registerWorkflow,
+  validateProject,
+  buildEcosystemContext,
+} from 'plantasonic-design-system/platform';
+
+const spec = installEngine('engine.sound');
+registerAsset('audio', 'Ambient Loop', 'assets://audio/loop.wav');
+```
+
+- [Platform Architecture](./docs/platform/PLATFORM_ARCHITECTURE_GUIDE.md) · [Engines](./docs/platform/ENGINE_INTEGRATION_GUIDE.md) · [Assets](./docs/platform/ASSET_PIPELINE_GUIDE.md) · [Workflows](./docs/platform/WORKFLOW_AUTOMATION_GUIDE.md)
+- [Project Registry](./docs/platform/PROJECT_REGISTRY_GUIDE.md) · [Deployment](./docs/platform/DEPLOYMENT_GUIDE.md) · [Quality](./docs/platform/QUALITY_ASSURANCE_GUIDE.md) · [Ecosystem Plugins](./docs/platform/ECOSYSTEM_PLUGIN_GUIDE.md)
+
+```bash
+npm run generate:ecosystem-context   # generated/ecosystem/*.json for AI tools
+```
+
+### Autonomous Creative Studio (Phase 16)
+
+Orchestrate the full creative lifecycle — concept through iteration — with `project.json` as the authoritative specification:
+
+```typescript
+import {
+  createProjectFromConcept,
+  loadWorkspace,
+  validateWorkspace,
+  runAutomation,
+} from 'plantasonic-design-system/studio';
+
+const result = createProjectFromConcept({
+  name: 'Bloom Room',
+  brief: 'Audio reactive installation with MIDI',
+});
+// result.spec, result.files, result.manifest — reproducible from project.json
+```
+
+- [Creative Studio](./docs/platform/CREATIVE_STUDIO_GUIDE.md) · [Project Specification](./docs/platform/PROJECT_SPECIFICATION_GUIDE.md) · [Workspace](./docs/platform/WORKSPACE_GUIDE.md) · [Automation](./docs/platform/AUTOMATION_GUIDE.md)
+- [Knowledge Repository](./docs/platform/KNOWLEDGE_REPOSITORY_GUIDE.md) · [Portfolio](./docs/platform/PORTFOLIO_MANAGEMENT_GUIDE.md) · [Studio Architecture](./docs/platform/STUDIO_ARCHITECTURE_GUIDE.md)
+
+```bash
+npm run generate:studio-context   # generated/studio/*.json for AI tools
+```
+
+### Version 1.0 — Platform Ready
+
+Public APIs are frozen. See [API Reference](./docs/platform/API_REFERENCE.md) and `generated/api-surface.json`.
+
+- [Application Development Guide](./docs/platform/APPLICATION_DEVELOPMENT_GUIDE.md) · [Release Guide](./docs/platform/RELEASE_GUIDE.md) · [Governance](./docs/platform/GOVERNANCE.md)
+- [Platform Audit Report](./docs/platform/PLATFORM_AUDIT_REPORT.md) · [Reference Examples](./examples/README.md)
+
 ---
 
 ## Design System Showcase
@@ -137,6 +306,17 @@ npm run showcase:preview
 ```
 
 Open `http://localhost:5173` after running `showcase:dev`.
+
+### Vanilla HTML demo
+
+A lighter **copy-paste reference** for foundations, platform components, and Bootstrap — no TypeScript:
+
+```bash
+cd demo && npm install
+npm run demo:dev    # from repository root
+```
+
+See [`demo/README.md`](./demo/README.md).
 
 ### What the showcase includes
 
@@ -331,6 +511,8 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md).
 | [TOKEN_ARCHITECTURE.md](./docs/TOKEN_ARCHITECTURE.md) | Naming, layers, theme switching |
 | [COMPONENT_MAPPING.md](./docs/COMPONENT_MAPPING.md) | Bootstrap class mapping |
 | [APPLY_DESIGN_SYSTEM.md](./prompts/APPLY_DESIGN_SYSTEM.md) | AI agent instructions |
+| [AI_ARCHITECTURE.md](./docs/platform/AI_ARCHITECTURE.md) | AI-native platform — registry, SDK, validation, generators |
+| [METADATA_SPECIFICATION.md](./docs/platform/METADATA_SPECIFICATION.md) | Machine-readable metadata contract |
 
 ---
 

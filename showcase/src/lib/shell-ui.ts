@@ -1,5 +1,5 @@
 import { docBlock, demoCard, sectionHeader, type DocMeta } from './ui';
-import { renderApplicationShell, EXAMPLE_SHELL, renderPanelStack, type ApplicationShellConfig } from '@ds/shell';
+import { renderApplicationShell, EXAMPLE_SHELL, SHOWCASE_SHELL, renderPanelStack, type ApplicationShellConfig } from '@ds/shell';
 
 export const SHELL_M4_DOC: DocMeta = {
   purpose: 'Application Shell — the operating system layer between the Design System and every Plantasonic application.',
@@ -48,12 +48,13 @@ export function shellModule(meta: ShellModuleMeta, demoHtml: string, code?: stri
 
 export function demoAppShell(
   config: Partial<ApplicationShellConfig> = {},
-  height = '24rem',
+  height = '32rem',
   workspaceContent?: string,
 ): string {
+  const shellConfig = { ...SHOWCASE_SHELL, ...config };
   return `
-    <div style="height:${height};position:relative" data-ps-app-shell-demo="${config.id ?? 'demo'}">
-      ${renderApplicationShell(config, workspaceContent)}
+    <div style="height:${height};min-height:28rem;position:relative;border-radius:var(--ds-radius-lg);overflow:hidden;border:1px solid var(--ds-color-border-subtle)" data-ps-app-shell-demo="${shellConfig.id ?? 'demo'}">
+      ${renderApplicationShell(shellConfig, workspaceContent)}
     </div>`;
 }
 
@@ -68,14 +69,14 @@ export function shellOverview(): string {
       <div class="col-md-3"><div class="card h-100"><div class="card-body"><h3 class="h6">Window State</h3><p class="small text-muted mb-0">Persist sidebar, dock, theme, workspace, panels.</p></div></div></div>
     </div>
     ${shellModule(
-      { name: 'Live Application Shell', purpose: 'Complete configured shell demo.', description: 'Interactive — try ⌘K, workspace modes, overlays, notifications.', usage: 'renderApplicationShell(EXAMPLE_SHELL)' },
-      demoAppShell(EXAMPLE_SHELL),
-      `import { renderApplicationShell, bindApplicationShell, EXAMPLE_SHELL } from 'plantasonic-design-system/shell';
+      { name: 'Live Application Shell', purpose: 'Complete configured shell demo.', description: 'Interactive — try ⌘K, workspace modes, overlays, notifications.', usage: 'renderApplicationShell(SHOWCASE_SHELL)' },
+      demoAppShell(SHOWCASE_SHELL),
+      `import { renderApplicationShell, bindApplicationShell, SHOWCASE_SHELL } from 'plantasonic-design-system/shell';
 
-root.innerHTML = renderApplicationShell(EXAMPLE_SHELL);
-bindApplicationShell(EXAMPLE_SHELL);`,
+root.innerHTML = renderApplicationShell(SHOWCASE_SHELL);
+bindApplicationShell(SHOWCASE_SHELL);`,
     )}
   `;
 }
 
-export { EXAMPLE_SHELL, renderPanelStack };
+export { EXAMPLE_SHELL, SHOWCASE_SHELL, renderPanelStack };
